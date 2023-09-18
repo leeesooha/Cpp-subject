@@ -15,7 +15,6 @@ CXX = c++
 INCLUDE = -I ./megaphone.hpp
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror $(INCLUDE)
 OBJS = $(SRCS:.cpp=.o)
-#header includes
 
 all : $(NAME)
 
