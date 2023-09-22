@@ -3,23 +3,24 @@
 
 int main(void)
 {
-	std::string str;
-	PhoneBook phonebook;
+	PhoneBook 	phonebook;
+	Contact 	contact;
+	std::string input;
 
 	while (1) {
-		std::getline(std::cin, str);
-		if (str.compare("ADD") == 0) {
-			phonebook.add;
+		std::cout << "PhoneBook> ";
+		std::getline(std::cin, input);
+		if (input.compare("ADD") == 0) {
+			phonebook.add();
 		}
-		else if (str.compare("SEARCH") == 0) {
-			phonebook.search;
+		else if (input.compare("SEARCH") == 0) {
+			phonebook.search();
 		}
-		else if (str.compare("EXIT") == 0) {
-			phonebook.exit;
+		else if (input.compare("EXIT") == 0) {
 			break ;
 		}
 		else
-			std::cout << "command not found" << std::endl;
+			std::cout << "command not found." << std::endl;
 	}
 	return (0);
 }
