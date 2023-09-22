@@ -1,6 +1,7 @@
 #include "phonebook.hpp"
 #include "contact.hpp"
 
+//연락처 출력시 한필드씩 출력해야 하는지 확인하기
 int main(void)
 {
 	PhoneBook 	phonebook;
