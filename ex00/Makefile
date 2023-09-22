@@ -7,12 +7,10 @@
 #header 중복include 주의
 #cpp파일 개수는 제한 없다.
 NAME = megaphone
-
 SRCS = 	main.cpp \
-		megaphone.cpp
-
+		$(NAME).cpp
 CXX = c++
-INCLUDE = -I ./megaphone.hpp
+INCLUDE = -I ./$(NAME).hpp
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror $(INCLUDE)
 OBJS = $(SRCS:.cpp=.o)
 

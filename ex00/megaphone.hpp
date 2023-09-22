@@ -5,8 +5,8 @@
 
 class MegaPhone {
 	public:
-	void loud(int wordcount, char **words);
-	void noise_loud(char **words);
+	void shout(std::string str);
+	void noise_shout(std::string str);
 };
 
 #endif

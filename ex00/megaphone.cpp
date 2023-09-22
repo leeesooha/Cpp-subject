@@ -1,14 +1,18 @@
 #include "megaphone.hpp"
 
-void MegaPhone::loud(int wordcount, char **words)
+void MegaPhone::shout(std::string str)
 {
-	std::string noise_loud = "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-
-	if (wordcount == 1) {
-		std::cout << noise_loud << "\n";
-		return ;
+	for (size_t i = 0; i < str.length(); i++) {
+		if (std::islower(str.at(i))) {
+			std::cout << static_cast<char>(std::toupper(str.at(i)));
+		}
+		else
+			std::cout << static_cast<char>(str.at(i));
 	}
-	
+	std::cout << std::endl;
 }
 
-void MegaPhone::noise_loud
+void MegaPhone::noise_shout (std::string str)
+{
+	std::cout << str << std::endl;
+}
