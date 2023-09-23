@@ -12,9 +12,20 @@ class Contact {
         std::string darkest_secret;
 
     public:
-        Contact() {};
+        Contact() : first_name(""),
+                    last_name(""),
+                    nickname(""),
+                    phone_number(""),
+                    darkest_secret("")
+                    {};
         ~Contact() {};
-        void setcontact(std::string pb_first_name,std::string pb_last_name, std::string pb_nickname, std::string pb_phone_number, std::string pb_darkest_secret);
+        void setcontact(
+                        std::string pb_first_name,
+                        std::string pb_last_name,
+                        std::string pb_nickname,
+                        std::string pb_phone_number,
+                        std::string pb_darkest_secret
+                        );
         std::string get_firstname ();
         std::string get_last_name ();
         std::string get_nickname ();
