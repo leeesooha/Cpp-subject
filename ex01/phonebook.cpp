@@ -11,8 +11,12 @@ std::string PhoneBook::print_form(std::string str) {
 
 void PhoneBook::add() {
 	std::string input[5];
-	std::string display_str[5] = {"enter your firstname.", "enter your lastname.", "enter your nickname.", "enter your phone number.", "enter your darkest secret."};
 	Contact new_contact;
+	std::string display_str[5] = {	"enter your firstname.",
+									"enter your lastname.",
+									"enter your nickname.",
+									"enter your phone number.",
+									"enter your darkest secret."};
 
 	for (int i = 0; i < 5; i++) {
 		std::cout << display_str[i] << std::endl;
@@ -49,6 +53,12 @@ void PhoneBook::search() {
 	std::cout << display_str << "(range is 0 to 7)" << std::endl;
 	std::cout << "> ";
 	std::getline(std::cin, input);
+	for (size_t i = 0; i < input.length(); ++i) {
+        if (!std::isdigit(input[i])) {
+			std::cout << "The input value is incorrect." << std::endl;
+            return ;
+        }
+    }
 	search_index = std::atoi(input.c_str());
 	if (search_index < 0 || search_index > 7) {
 		std::cout << "The input value is incorrect." << std::endl;
@@ -61,5 +71,6 @@ void PhoneBook::search() {
 	std::cout << "|" << std::setw(10) << print_form(input);
 	std::cout << "|" << std::setw(10) << print_form(PhoneBook::contacts[search_index].get_firstname());
 	std::cout << "|" << std::setw(10) << print_form(PhoneBook::contacts[search_index].get_last_name());
-	std::cout << "|" << std::setw(10) << print_form(PhoneBook::contacts[search_index].get_nickname()) << "|" << std::endl;
+	std::cout << "|" << std::setw(10) << print_form(PhoneBook::contacts[search_index].get_nickname());
+	std::cout << "|" << std::endl;
 }

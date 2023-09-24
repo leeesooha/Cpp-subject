@@ -2,6 +2,7 @@
 #define MEGAPHONE_HPP
 
 #include <iostream>
+#include <string>
 
 class MegaPhone {
 	public:

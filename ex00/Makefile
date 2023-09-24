@@ -1,11 +1,3 @@
-#compile flags
-#c++ -std=c++98 -Wall -Wextra -Werror
-
-#namespace, friend keyword 금지
-
-#header file에 function작성시 0점
-#header 중복include 주의
-#cpp파일 개수는 제한 없다.
 NAME = megaphone
 SRCS = 	main.cpp \
 		$(NAME).cpp
