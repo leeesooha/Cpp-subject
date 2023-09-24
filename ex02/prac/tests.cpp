@@ -17,7 +17,7 @@ int		main( void ) {
 
 	typedef std::vector<Account::t>							  accounts_t;	//<Account::t>: t는 Account class의 별칭, vector: 동적배열자료형, 결론 : Account클래스벡터자료형의 타입이름을 accounts_t로 정의.
 	typedef std::vector<int>								  ints_t;	//정수형벡터의 타입이름(alias)을 ints_t로 정의.
-	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t; //pair : 두가지 다른 타입의 요소를 쌍(pair)으로 담을 수 있는 자료형이다. accounts_t::iterator : accounts_t는 아까 vector<Account::t>의 타입으로 정의된 타입이다. iterator는 컨테이너(벡터,맵,리스트)의 원소를 접근하기 위한 클래스이다. 결론 : accounts_t::iterator와 ints_t::iterator를 포함하는 타입이름 acc_int_t로 정의
+	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t; //pair : 두가지 다른 타입의 요소를 쌍(pair)으로 담을 수 있는 자료형이다. accounts_t::iterator : accounts_t는 아까 vector<Account::t>의 타입으로 정의된 타입이다. iterator는 컨테이너(벡터,맵,리스트)의 원소를 접근하기 위한 클래스이며 []참조접근 방법과 용도가 같다. 결론 : accounts_t::iterator와 ints_t::iterator를 포함하는 타입이름 acc_int_t로 정의
 
 	//계좌 8개 생성코드
 	int	const				amounts[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };	//int형 배열 선언
