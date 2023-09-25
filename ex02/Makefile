@@ -1,7 +1,7 @@
 NAME = Account
 SRCS = 	tests.cpp \
 		$(NAME).cpp
-INCLUDE = -I ./$(NAME).hpp -I ./Account.hpp
+INCLUDE = -I .
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror $(INCLUDE)
 OBJS = $(SRCS:.cpp=.o)

@@ -2,7 +2,7 @@ NAME = megaphone
 SRCS = 	main.cpp \
 		$(NAME).cpp
 CXX = c++
-INCLUDE = -I ./$(NAME).hpp
+INCLUDE = -I .
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror $(INCLUDE)
 OBJS = $(SRCS:.cpp=.o)
 

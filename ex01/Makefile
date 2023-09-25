@@ -2,7 +2,7 @@ NAME = phonebook
 SRCS = 	main.cpp \
 		$(NAME).cpp \
 		contact.cpp
-INCLUDE = -I ./$(NAME).hpp -I ./contact.hpp
+INCLUDE = -I .
 CXX = c++
 CXXFLAGS = -std=c++98 -Wall -Wextra -Werror $(INCLUDE)
 OBJS = $(SRCS:.cpp=.o)

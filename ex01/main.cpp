@@ -1,5 +1,6 @@
 #include "phonebook.hpp"
 #include "contact.hpp"
+#include <cstdlib>
 
 int main(void)
 {
@@ -11,7 +12,7 @@ int main(void)
 		std::cout << "PhoneBook> ";
 		std::getline(std::cin, input);
 		if (std::cin.eof() == true)
-			exit (0) ;
+			exit (0);
 		if (input.compare("ADD") == 0) {
 			phonebook.add();
 		} else if (input.compare("SEARCH") == 0) {
