@@ -12,8 +12,6 @@ int main(int argc, char **argv)
 	else {
 		for (int i = 1; i < argc; i++) {
 			messages.append(argv[i]);
-			if (i != argc - 1)
-				messages.append(" ");
 		}
 		mymegaphone.shout(messages);
 	}

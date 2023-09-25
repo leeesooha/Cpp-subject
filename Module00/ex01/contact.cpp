@@ -1,5 +1,16 @@
 #include "contact.hpp"
 
+Contact::Contact() : first_name(""),
+                    last_name(""),
+                    nickname(""),
+                    phone_number(""),
+                    darkest_secret("")
+{
+}
+Contact::~Contact()
+{
+}
+
 void Contact::setcontact(std::string pb_first_name,
 						std::string pb_last_name,
 						std::string pb_nickname,

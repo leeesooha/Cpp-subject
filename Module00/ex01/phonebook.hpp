@@ -14,8 +14,8 @@ class PhoneBook {
 	public :
 		Contact contacts[8];
 
-		PhoneBook() : current_list_contact(0), number_of_contact(0) {};
-		~PhoneBook() {};
+		PhoneBook();
+		~PhoneBook();
 		void add();
 		void search();
 };

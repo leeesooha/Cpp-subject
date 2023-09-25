@@ -1,6 +1,14 @@
 #include "phonebook.hpp"
 #include "contact.hpp"
 
+PhoneBook::PhoneBook() : current_list_contact(0), number_of_contact(0)
+{
+}
+
+PhoneBook::~PhoneBook()
+{
+}
+
 std::string PhoneBook::print_form(std::string str) {
 	if (str.length() > 10)
 		return (str.substr(0, 9) + ".");
