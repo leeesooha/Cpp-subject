@@ -1,9 +1,6 @@
 #include "phonebook.hpp"
 #include "contact.hpp"
 
-//연락처 출력시 한필드씩 출력해야 하는지 확인하기
-//atoi stoi로 수정하기
-//magic number 변수로 치환하기
 int main(void)
 {
 	PhoneBook 	phonebook;
@@ -13,7 +10,8 @@ int main(void)
 	while (true) {
 		std::cout << "PhoneBook> ";
 		std::getline(std::cin, input);
-
+		if (std::cin.eof() == true)
+			exit (0) ;
 		if (input.compare("ADD") == 0) {
 			phonebook.add();
 		} else if (input.compare("SEARCH") == 0) {

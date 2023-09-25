@@ -1,5 +1,3 @@
-#include <iostream>
-#include <iomanip>
 #include "phonebook.hpp"
 #include "contact.hpp"
 
@@ -22,6 +20,8 @@ void PhoneBook::add() {
 		std::cout << display_str[i] << std::endl;
 		std::cout << "> ";
 		std::getline(std::cin, input[i]);
+		if (std::cin.eof() == true)
+			exit (0) ;
 		if (input[i].length() <= 0) {
 			i--;
 		} 
@@ -53,6 +53,8 @@ void PhoneBook::search() {
 	std::cout << display_str << "(range is 0 to 7)" << std::endl;
 	std::cout << "> ";
 	std::getline(std::cin, input);
+	if (std::cin.eof() == true)
+			exit (0) ;
 	for (size_t i = 0; i < input.length(); ++i) {
         if (!std::isdigit(input[i])) {
 			std::cout << "The input value is incorrect." << std::endl;

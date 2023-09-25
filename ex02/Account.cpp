@@ -146,9 +146,3 @@ void	Account::_displayTimestamp( void )
 
     return ;
 }
-
-// void	Account::_displayTimestamp( void )
-// {
-//     std::cout << "[19920104_091532] ";
-//     return ;
-// }

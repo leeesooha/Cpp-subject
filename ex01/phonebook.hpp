@@ -1,8 +1,9 @@
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
-#include <iostream>
 #include "contact.hpp"
+#include <iostream>
+#include <iomanip>
 
 class PhoneBook {
 	private :
@@ -19,6 +20,3 @@ class PhoneBook {
 };
 
 #endif
-
-
-// std::string input_first_name, std::string input_last_name, std::string input_nickname, std::string input_phone_number, std::string input_darkest_secret
