@@ -1,13 +1,11 @@
 #include "Weapon.hpp"
 
-Weapon::Weapon()
+Weapon::Weapon() : weapon_Type("NONE")
 {
-	
 }
 
 Weapon::~Weapon()
 {
-	
 }
 
 Weapon::Weapon(std::string weapon)
