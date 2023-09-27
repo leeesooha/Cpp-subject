@@ -1,6 +1,6 @@
-NAME = myreplacer
+NAME = harl
 SRCS =	main.cpp \
-		MyString.cpp
+		Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I .
 CXX = c++
