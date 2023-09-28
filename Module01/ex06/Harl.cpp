@@ -10,14 +10,28 @@ Harl::~Harl()
 
 void Harl::complain( std::string level )
 {
-	size_t level_range = 4;
-	std::string levels[] = {"DEBUG", "INFO", "WARNING", "ERROR"};
-	void (Harl::*functionPointers[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error};
+	std::string levels[5] = {"NONE", "DEBUG", "INFO", "WARNING", "ERROR"};
+	size_t level_index = 0;
 
-	for (size_t i = 0; i < level_range; i++)
+	for (size_t i = 1; i < 5; i++)
 	{
 		if (levels[i] == level)
-			(this->*functionPointers[i])();
+			level_index = i;
+	}
+
+	switch (level_index)
+	{
+		case 0 :
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+			break ;
+		case 1 :
+			Harl::debug();
+		case 2 :
+			Harl::info();
+		case 3 :
+			Harl::warning();
+		case 4 :
+			Harl::error();
 	}
 }
 
@@ -51,3 +65,4 @@ void Harl::error( void )
 	std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
 	std::cout << std::endl;
 }
+
