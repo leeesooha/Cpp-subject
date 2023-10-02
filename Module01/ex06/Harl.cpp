@@ -10,10 +10,10 @@ Harl::~Harl()
 
 void Harl::complain( std::string level )
 {
-	std::string levels[5] = {"NONE", "DEBUG", "INFO", "WARNING", "ERROR"};
-	size_t level_index = 0;
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	size_t level_index = -1;
 
-	for (size_t i = 1; i < 5; i++)
+	for (size_t i = 0; i < 4; i++)
 	{
 		if (levels[i] == level)
 			level_index = i;
@@ -22,16 +22,26 @@ void Harl::complain( std::string level )
 	switch (level_index)
 	{
 		case 0 :
-			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+			Harl::debug();
+			Harl::info();
+			Harl::warning();
+			Harl::error();
 			break ;
 		case 1 :
-			Harl::debug();
-		case 2 :
 			Harl::info();
-		case 3 :
 			Harl::warning();
-		case 4 :
 			Harl::error();
+			break ;
+		case 2 :
+			Harl::warning();
+			Harl::error();
+			break ;
+		case 3 :
+			Harl::error();
+			break ;
+		default :
+			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+			break ;
 	}
 }
 
