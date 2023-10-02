@@ -29,14 +29,18 @@ int ioFileStatus(std::ifstream &inputFile, std::ofstream &outputFile, std::strin
 void getFileText(std::ifstream &inputFile, std::string &fileText)
 {
 	std::string buff;
-	size_t pos = 0;
+
+	inputFile.seekg(0, std::ios::end);
+    std::streampos	fileSize = inputFile.tellg();
+	inputFile.seekg(0, std::ios::beg);
 
 	while (std::getline(inputFile, buff))
+	{
 		fileText.append(buff).append("\n");
-	inputFile.close();
-	pos = fileText.rfind("\n");
-	if ((int)pos != -1)
-		fileText.erase(pos, 1);
+	}
+	long long	fileTextSize = fileText.size();
+	if (fileTextSize != fileSize)
+	 	fileText.erase(fileTextSize - 1, 1);
 }
 
 void allReplace(std::string &fileText, std::string &src_str, std::string &dst_str)
@@ -44,7 +48,7 @@ void allReplace(std::string &fileText, std::string &src_str, std::string &dst_st
 	size_t pos = 0;
 
 	MyString mystr(fileText);
-	size_t src_str_length = src_str.length();
+	size_t src_str_length = src_str.size();
 	if (src_str_length == 0)
 		return ;
 	pos = fileText.find(src_str);
@@ -71,8 +75,9 @@ int main(int argc, char **argv)
 	if (ioFileStatus(inputFile, outputFile, src_filename, dst_filename) == 1)
 		return (1);
 	getFileText(inputFile, fileText);
+	inputFile.close();
 	allReplace(fileText, src_str, dst_str);
-	outputFile << fileText;
+	outputFile << fileText; 
 	outputFile.close();
 	return (0);
 }
