@@ -4,11 +4,12 @@ int main(void)
 {
 	std::string name1 = "one";
 	std::string name2 = "two";
-	Zombie* newzombie;
 
+	Zombie* newzombie;
 	newzombie = newZombie(name1);
 	newzombie->announce();
-	randomChump(name2);
 	delete newzombie;
+
+	randomChump(name2);
 	return (0);
 }
