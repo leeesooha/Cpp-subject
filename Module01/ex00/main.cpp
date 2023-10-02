@@ -2,14 +2,14 @@
 
 int main(void)
 {
-	std::string name1 = "one";
-	std::string name2 = "two";
+	std::string name_for_heap = "one";
+	std::string name_for_stack = "two";
 
 	Zombie* newzombie;
-	newzombie = newZombie(name1);
+	newzombie = newZombie(name_for_heap);
 	newzombie->announce();
 	delete newzombie;
 
-	randomChump(name2);
+	randomChump(name_for_stack);
 	return (0);
 }
