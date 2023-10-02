@@ -2,9 +2,9 @@
 
 int main(void)
 {
-	int	NbZombie = 10;
+	int			NbZombie = 10;
 	std::string name = "zombie";
-	Zombie* zombies = zombieHorde(NbZombie, name);
+	Zombie* 	zombies = zombieHorde(NbZombie, name);
 
 	if (zombies == NULL)
 		return (1);
