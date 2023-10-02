@@ -1,22 +1,28 @@
 #include "HumanA.hpp"
 #include "Weapon.hpp"
 
-HumanA::HumanA() : Human_name(""), Human_club(NULL)
+HumanA::HumanA() : _name(std::string("WHO_AM_I")), _weapon(NULL)
 {
+	_weapon = new Weapon("default spiked club");
+	_heapAllocate = 1;
 }
 
-HumanA::HumanA(std::string name, Weapon &club) : Human_name(name), Human_club(&club)
+HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(&weapon)
 {
+	_heapAllocate = 0;
 }
 
 HumanA::~HumanA()
 {
+	if (_heapAllocate == 1)
+	{
+		delete _weapon;
+		std::cout << "default spiked club is gone" << std::endl;
+	}
 }
 
 void HumanA::attack()
 {
-	if (HumanA::Human_club == NULL)
-		return ;
-	std::cout << HumanA::Human_name << " attacks with their ";
-	std::cout << HumanA::Human_club->getType() << std::endl;
+	std::cout << HumanA::_name << " attacks with their ";
+	std::cout << HumanA::_weapon->getType() << std::endl;
 }

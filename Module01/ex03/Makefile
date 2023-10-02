@@ -1,4 +1,4 @@
-NAME = weapon
+NAME = war
 SRCS =	main.cpp \
 		Weapon.cpp \
 		HumanA.cpp \

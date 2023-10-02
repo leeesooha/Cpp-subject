@@ -8,12 +8,12 @@ class Weapon
 {
 	public :
 		Weapon();
-		Weapon(std::string weapon);
+		Weapon(std::string type);
 		~Weapon();
 		const std::string& getType();
 		void setType(std::string new_weapon);
 	private :
-		std::string weapon_Type;
+		std::string _type;
 };
 
 #endif

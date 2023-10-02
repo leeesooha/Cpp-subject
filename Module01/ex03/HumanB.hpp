@@ -15,8 +15,8 @@ class HumanB
 		void attack();
 		void setWeapon(Weapon &club);
 	private :
-		std::string Human_name;
-		Weapon *Human_club;
+		std::string _name;
+		Weapon 		*_weapon;
 };
 
 #endif
