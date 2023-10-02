@@ -12,7 +12,7 @@ class MyString
 		~MyString();
 		void myReplace(size_t pos, size_t len, std::string& str);
 	private :
-		std::string *mystr;
+		std::string *_myStr;
 };
 
 #endif
