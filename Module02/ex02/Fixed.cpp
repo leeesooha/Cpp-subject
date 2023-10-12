@@ -59,8 +59,6 @@ std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
 	return (out);
 }
 
-
-//------------------operator overload----------------------------
 bool Fixed::operator<(const Fixed& other) const
 {
     if (this->_fixedPointNb < other._fixedPointNb)
