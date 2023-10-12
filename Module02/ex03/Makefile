@@ -1,7 +1,8 @@
 NAME = a.out
 SRCS =	main.cpp \
 		Fixed.cpp \
-		Point.cpp
+		Point.cpp \
+		bsp.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I .
 CXX = c++

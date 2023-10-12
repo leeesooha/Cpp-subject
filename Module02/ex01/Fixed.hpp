@@ -9,7 +9,7 @@ class Fixed
 		Fixed();
 		Fixed(const int intNum);
 		Fixed(const float floatNum);
-		Fixed(const Fixed& origin);
+		Fixed(const Fixed& other);
 		Fixed& operator=(const Fixed& other);
 		~Fixed();
 		int getRawBits( void ) const;

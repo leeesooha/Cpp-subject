@@ -1,15 +1,8 @@
 #include "Fixed.hpp"
 #include "Point.hpp"
-#include "bsp.cpp"
-
-void test(void)
-{
-	system("leaks a.out");
-}
 
 int main(void)
 {
-	// atexit(test);
 	Point a(2,2);
 	Point b(5,6);
 	Point c(6,4);
