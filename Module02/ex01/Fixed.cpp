@@ -42,9 +42,10 @@ Fixed::Fixed (const int intNum) : _fixedPointNb(intNum << _fractionBit)
     std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed (const float floatNum) : _fixedPointNb(roundf(floatNum * (1 << _fractionBit)))
+Fixed::Fixed (const float floatNum)
 {
     std::cout << "Float constructor called" << std::endl;
+    this->setRawBits(roundf(floatNum * (1 << this->_fractionBit)));
 }
 
 float Fixed::toFloat( void ) const
