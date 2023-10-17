@@ -92,3 +92,23 @@ void ClapTrap::beRepaired(unsigned int amount)
 	else
 		std::cout << "ClapTrap " << this->_name << " doesn't have enough energy" << std::endl;
 }
+
+// void ClapTrap::setAttackDamage(unsigned int amount)
+// {
+// 	this->_attackDamage = amount;
+// }
+
+// std::string ClapTrap::setName(std::string name)
+// {
+// 	this->_name = name;
+// }
+
+// unsigned int ClapTrap::setHitPoints()
+// {
+
+// }
+
+// unsigned int ClapTrap::setEnergyPoints()
+// {
+
+// }

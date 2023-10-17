@@ -1,7 +1,7 @@
 SRCS = main.cpp \
 	   ClapTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./
+INCLUDE = -I ./
 NAME = Clap
 CXX = c++
 MYFLAGS = -std=c++98 -Wall -Wextra -Werror
@@ -9,7 +9,9 @@ CXXFLAGS = $(MYFLAGS) $(INCLUDE)
 
 
 all : $(NAME)
-	$(CXX) $(CXXFLAGE) $(OBJS) -o $(NAME);
+
+$(NAME) : $(OBJS)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME);
 
 clean :
 		rm -f $(OBJS);
