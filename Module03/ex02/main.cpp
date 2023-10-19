@@ -1,5 +1,6 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 void print_ClapTraps(ClapTrap& claptrap)
 {
@@ -54,5 +55,18 @@ int main(void)
                                 //그런데 부모클래스타입포인터에 자식클래스주소를 넣은 후 부모클래스타입포인터로 멤버함수 호출시, 부모클래스의 멤버함수가 호출되버린다. 의도와는 다른 상황이 발생하는 경우가 다반사이다.
                                 //cpp 컴파일러는 해당 포인터 타입을 기준으로 함수를 호출하기 때문이다.
                                 //이때 베이스클래스에 멤버함수를 virtual로 지정하면 cpp 컴파일러는 부모클래스타입포인터내 주소값의 객체에 접근하여 멤버함수를 호출한다.
+    std::cout << std::endl << std::endl;
+//-----------FragTrap--------------------//
+
+    FragTrap E("E");
+    FragTrap F("F");
+    E.attack("F");
+    F.takeDamage(2);
+
+    print_ClapTraps(E);
+    print_ClapTraps(F);
+    E.highFivesGuys();
+    F.highFivesGuys();
+
     return (0);
 }
