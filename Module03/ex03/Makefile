@@ -8,7 +8,7 @@ OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
 NAME = diamondtrap
 CXX = c++
-MYFLAGS = -std=c++98 -Wall -Wextra -Werror
+MYFLAGS = -std=c++98 -Wall -Wextra -Werror -Wshadow
 CXXFLAGS = $(MYFLAGS) $(INCLUDE)
 
 
