@@ -1,14 +1,19 @@
 #include "ClapTrap.hpp"
 
+void print_ClapTraps(ClapTrap& claptrap)
+{
+    std::cout << "-----------------------------------------------------------------------" << std::endl;
+    std::cout << "| Name : " << claptrap.getName() << " | HitPoint : " << claptrap.getHitPoints() << " | EnergyPoints : " << claptrap.getEnergyPoints() << " | AttackDamage : " << claptrap.getAttackDamage() << " |" << std::endl;
+    std::cout << "-----------------------------------------------------------------------" << std::endl;
+}
+
 int main(void)
 {
     ClapTrap A("A");
     ClapTrap B("B");
 
-    std::cout << "---------------------------------------------------------------------------------" << std::endl;
-    std::cout << "A's info-> " << "Name : " << A.getName() << " | Hitpoints : " << A.getHitPoints() << " | Energypoints : " << A.getEnergyPoints() << " | attackdamage : " << A.getAttackDamage() << std::endl;
-    std::cout << "B's info-> " << "Name : " << B.getName() << " | Hitpoints : " << B.getHitPoints() << " | Energypoints : " << B.getEnergyPoints() << " | attackdamage : " << B.getAttackDamage() << std::endl;
-    std::cout << "---------------------------------------------------------------------------------" << std::endl;
+    print_ClapTraps(A);
+    print_ClapTraps(B);
 
     A.attack(B.getName());
     B.takeDamage(9);
@@ -17,9 +22,7 @@ int main(void)
     B.takeDamage(1);
     B.attack(A.getName());
 
-    std::cout << "---------------------------------------------------------------------------------" << std::endl;
-    std::cout << "A's info-> " << "Name : " << A.getName() << " | Hitpoints : " << A.getHitPoints() << " | Energypoints : " << A.getEnergyPoints() << " | attackdamage : " << A.getAttackDamage() << std::endl;
-    std::cout << "B's info-> " << "Name : " << B.getName() << " | Hitpoints : " << B.getHitPoints() << " | Energypoints : " << B.getEnergyPoints() << " | attackdamage : " << B.getAttackDamage() << std::endl;
-    std::cout << "---------------------------------------------------------------------------------" << std::endl;
+    print_ClapTraps(A);
+    print_ClapTraps(B);
     return (0);
 }

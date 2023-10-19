@@ -2,60 +2,43 @@
 
 ScavTrap::ScavTrap() : ClapTrap()
 {
-	std::cout << "ScavTrap Default constructor called" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout << "[ScavTrap] " << "Default constructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap()
 {
 	this->_name = name;
-	this->_hitPoints = 10;
-	this->_energyPoints = 10;
-	this->_attackDamage = 0;
-	std::cout << this->_name << " Constructor called" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout << "[ScavTrap] " << this->_name << " Constructor called" << std::endl;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& other)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_name = other._name;
-		this->_hitPoints = 10;
-		this->_energyPoints = 10;
-		this->_attackDamage = 0;
+		this->_hitPoints = other._hitPoints;
+		this->_energyPoints = other._energyPoints;
+		this->_attackDamage = other._attackDamage;
 	}
+	std::cout << "[ScavTrap] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 ScavTrap::ScavTrap(const ScavTrap &other)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
+	std::cout << "[ScavTrap] " << "Copy constructor called" << std::endl;
 }
 
-ScavTrap::~ScavTrap() : ~ClapTrap()
+ScavTrap::~ScavTrap()
 {
-	std::cout << this->_name << " Destructor called" << std::endl;
-}
-
-std::string ScavTrap::getName()
-{
-	return (this->_name);
-}
-
-unsigned int ScavTrap::getHitPoints()
-{
-	return (this->_hitPoints);
-}
-
-unsigned int ScavTrap::getEnergyPoints()
-{
-	return (this->_energyPoints);
-}
-
-unsigned int ScavTrap::getAttackDamage()
-{
-	return (this->_attackDamage);
+	std::cout << "[ScavTrap] " << this->_name << " Destructor called" << std::endl;
 }
 
 void ScavTrap::attack(const std::string& target)
@@ -90,22 +73,7 @@ void ScavTrap::beRepaired(unsigned int amount)
 		std::cout << "ScavTrap " << this->_name << " doesn't have enough energy" << std::endl;
 }
 
-// void ScavTrap::setAttackDamage(unsigned int amount)
-// {
-// 	this->_attackDamage = amount;
-// }
-
-// std::string ScavTrap::setName(std::string name)
-// {
-// 	this->_name = name;
-// }
-
-// unsigned int ScavTrap::setHitPoints()
-// {
-
-// }
-
-// unsigned int ScavTrap::setEnergyPoints()
-// {
-
-// }
+void ScavTrap::guardGate()
+{
+	std::cout << this->_name << " is in gatekeeper mode" << std::endl;
+}
