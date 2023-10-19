@@ -52,28 +52,10 @@ void ScavTrap::attack(const std::string& target)
 		std::cout << "ScavTrap " << this->_name << " doesn't have enough energy" << std::endl;
 }
 
-void ScavTrap::takeDamage(unsigned int amount)
-{
-	if (this->_hitPoints >= amount)
-		this->_hitPoints -= amount;
-	else
-		this->_hitPoints = 0;
-	std::cout << "ScavTrap " << this->_name << " take "<< amount << " points of damage!" << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount)
-{
-	if (this->_energyPoints >= amount)
-	{
-		this->_hitPoints += amount;
-		this->_energyPoints -= amount;
-		std::cout << "ScavTrap " << this->_name <<  " repair "<< amount << " points" << std::endl;
-	}
-	else
-		std::cout << "ScavTrap " << this->_name << " doesn't have enough energy" << std::endl;
-}
-
 void ScavTrap::guardGate()
 {
-	std::cout << this->_name << " is in gatekeeper mode" << std::endl;
+	if (this->_hitPoints == 0)
+		std::cout << "ScavTrap has no HitPoint" << std::endl;
+	else
+		std::cout << this->_name << " is in gatekeeper mode" << std::endl;
 }

@@ -68,8 +68,10 @@ void ClapTrap::attack(const std::string& target)
 		this->_energyPoints--;
 		std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage!" << std::endl;
 	}
-	else
-		std::cout << "ClapTrap " << this->_name << " doesn't have enough energy" << std::endl;
+	else if (this->_energyPoints == 0)
+		std::cout << "ClapTrap " << this->_name << " doesn't have EnergyPoint" << std::endl;
+	else if (this->_hitPoints == 0)
+		std::cout << "ClapTrap has no HitPoint" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
@@ -90,25 +92,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << this->_name <<  " repair "<< amount << " points" << std::endl;
 	}
 	else
-		std::cout << "ClapTrap " << this->_name << " doesn't have enough energy" << std::endl;
+		std::cout << "ClapTrap " << this->_name << " doesn't have enough EnergyPoint" << std::endl;
 }
-
-// void ClapTrap::setAttackDamage(unsigned int amount)
-// {
-// 	this->_attackDamage = amount;
-// }
-
-// std::string ClapTrap::setName(std::string name)
-// {
-// 	this->_name = name;
-// }
-
-// unsigned int ClapTrap::setHitPoints()
-// {
-
-// }
-
-// unsigned int ClapTrap::setEnergyPoints()
-// {
-
-// }

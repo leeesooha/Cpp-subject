@@ -2,7 +2,7 @@ SRCS = main.cpp \
 	   ClapTrap.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
-NAME = Clap
+NAME = claptrap
 CXX = c++
 MYFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXXFLAGS = $(MYFLAGS) $(INCLUDE)
