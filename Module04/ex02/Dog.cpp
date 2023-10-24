@@ -1,7 +1,7 @@
 #include "Dog.hpp"
 #include "Brain.hpp"
 
-Dog::Dog() : Animal()
+Dog::Dog() : AAnimal()
 {
 	this->_type = "Dog";
 	this->_brain = new Brain();
@@ -21,7 +21,7 @@ Dog& Dog::operator=(const Dog& other)
 	return (*this);
 }
 
-Dog::Dog(const Dog &other) : Animal()
+Dog::Dog(const Dog &other) : AAnimal()
 {
 	this->_brain = new Brain();
 	std::cout << "[Dog] " << "Copy constructor called" << std::endl;
