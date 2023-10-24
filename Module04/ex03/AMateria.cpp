@@ -1,4 +1,5 @@
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
 
 AMateria::AMateria() : _type("DefaultType")
 {
@@ -35,4 +36,9 @@ AMateria::~AMateria()
 std::string const& AMateria::getType() const
 {
 	return (this->_type);
+}
+
+void AMateria::use(ICharacter& target)
+{
+	std::cout << "[AMateria] " << "AMateria's \'use\' function called" << std::endl;
 }

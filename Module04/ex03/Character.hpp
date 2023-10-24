@@ -5,12 +5,13 @@
 #include "ICharacter.hpp"
 #include <string>
 #include <iostream>
+#define IVENTORY_SIZE 4
 
 class Character : public ICharacter
 {
 	private :
 		std::string _name;
-		AMateria _inventory[4];
+		AMateria *_inventory[IVENTORY_SIZE];
 	public:
 		Character();
 		Character(const std::string name);

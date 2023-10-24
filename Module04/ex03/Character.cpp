@@ -1,4 +1,5 @@
 #include "Character.hpp"
+#include "AMateria.hpp"
 
 // 	std::string _name;
 // public:
@@ -11,13 +12,17 @@
 Character::Character() : ICharacter()
 {
 	this->_name = "DefaultCharacter";
+	for (size_t i = 0; i < IVENTORY_SIZE; i++)
+		(this->_inventory)[i] = NULL;
 	std::cout << "[Character] " << this->_name << " Default constructor called" << std::endl;
 }
 
 Character::Character(const std::string name)
 {
-	std::cout << "[Character] " << this->_name << " Constructor called" << std::endl;
 	this->_name = name;
+	for (size_t i = 0; i < IVENTORY_SIZE; i++)
+		(this->_inventory)[i] = NULL;
+	std::cout << "[Character] " << this->_name << " Constructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character& other)
@@ -26,6 +31,8 @@ Character& Character::operator=(const Character& other)
 	if (this != &other)
 	{
 		this->_name = other._name;
+		for (size_t i = 0; i < IVENTORY_SIZE; i++)
+			(this->_inventory)[i] = (other._inventory[i]);
 	}
 	return (*this);
 }
@@ -48,15 +55,33 @@ std::string const & Character::getName() const
 
 void Character::equip(AMateria* m)
 {
+	size_t idx = 0;
 
+	while (idx < IVENTORY_SIZE && (this->_inventory)[idx] != NULL)
+		idx++;
+	if (idx == IVENTORY_SIZE)
+		return ;
+	(this->_inventory)[idx] = m;
 }
 
 void Character::unequip(int idx)
 {
-
+	if ((idx >= 0 && idx < IVENTORY_SIZE) == false)
+		return ;
+	(this->_inventory)[idx] = NULL;
 }
 
 void Character::use(int idx, Character& target)
 {
+	size_t j = 0;
 
+	while (j < IVENTORY_SIZE)
+	{
+		if ((this->_inventory)[j] == NULL)
+			return ;
+		j++;
+	}
+	if (j == IVENTORY_SIZE)
+		return ;
+	(this->_inventory)[j]->use(target);
 }
