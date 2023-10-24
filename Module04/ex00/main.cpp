@@ -1,6 +1,8 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 #include <stdlib.h>
 
 void leak_check(void)
@@ -11,6 +13,8 @@ void leak_check(void)
 int main(void)
 {
     atexit(leak_check);
+
+    //subject test case
     const Animal* meta = new Animal();
     const Animal* j = new Dog();
     const Animal* i = new Cat();
@@ -19,9 +23,19 @@ int main(void)
     i->makeSound(); //will output the cat sound!
     j->makeSound();
     meta->makeSound();
-    // ...
     delete meta;
     delete i;
     delete j;
+    std::cout << std::endl << "-------------------------------" << std::endl << std::endl;
+
+    //Wrong Version
+    const WrongAnimal* wrongMeta = new WrongAnimal();
+    const WrongAnimal* wrongi = new WrongCat();
+    std::cout << wrongi->getType() << " " << std::endl;
+    wrongi->makeSound(); //will output the cat sound!
+    wrongMeta->makeSound();
+    delete wrongMeta;
+    delete wrongi;
+
     return (0);
 }
