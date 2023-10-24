@@ -1,6 +1,7 @@
 SRCS = main.cpp \
 	   AMateria.cpp \
-	   Ice.cpp
+	   Ice.cpp \
+	   ICharacter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
