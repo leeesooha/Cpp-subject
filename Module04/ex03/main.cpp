@@ -2,6 +2,7 @@
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include <stdlib.h>
 
 void leak_check(void)
 {

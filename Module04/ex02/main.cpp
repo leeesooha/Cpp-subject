@@ -2,6 +2,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "Brain.hpp"
+#include <stdlib.h>
 
 void leak_check(void)
 {

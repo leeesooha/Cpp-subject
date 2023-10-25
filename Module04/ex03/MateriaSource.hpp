@@ -3,6 +3,7 @@
 
 #include "AMateria.hpp"
 #include "IMateriaSource.hpp"
+#include <cstring>
 #include <string>
 #include <iostream>
 
