@@ -3,7 +3,10 @@
 
 Ice::Ice() : AMateria()
 {
-	AMateria::_type = "ice";
+	this->_type = "ice";
+	this->_offset = 0;
+	this->_size = 1;
+	this->_materias = new Ice[this->_size];
 	std::cout << "[Ice] " << this->_type << " Default constructor called" << std::endl;
 }
 
@@ -13,6 +16,8 @@ Ice& Ice::operator=(const Ice& other)
 	if (this != &other)
 	{
 		this->_type = other._type;
+		this->_offset = 0;
+		this->_materias = other._materias;
 	}
 	return (*this);
 }
@@ -30,7 +35,12 @@ Ice::~Ice()
 
 AMateria* Ice::clone() const
 {
+	AMateria *tmpMaterias;
+
 	AMateria *clone_AMateria = new Ice(*this);
+	this->setSize(this->_size + 1);
+	tmpMaterias = new Ice[this->_size];
+
 	return (clone_AMateria);
 }
 

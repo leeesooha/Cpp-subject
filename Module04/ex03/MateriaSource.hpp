@@ -12,12 +12,11 @@ class MateriaSource : public IMateriaSource
 {
 	private :
 		AMateria *_inventory[IVENTORY_SIZE];
-		AMateria *_copyMateriaSource;
-		unsigned int _copyCount;
+		unsigned int _offset;
 	public:
-		virtual ~MateriaSource() {}
-		virtual void learnMateria(AMateria*) = 0;
-		virtual AMateria* createMateria(std::string const & type) = 0;
+		virtual ~MateriaSource();
+		virtual void learnMateria(AMateria* materia);
+		virtual AMateria* createMateria(std::string const & type);
 };
 
 #endif

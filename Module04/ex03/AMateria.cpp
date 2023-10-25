@@ -42,3 +42,13 @@ void AMateria::use(ICharacter& target)
 {
 	std::cout << "[AMateria] " << "AMateria's \'use\' function called" << std::endl;
 }
+
+void AMateria::setSize(unsigned int i)
+{
+	this->_size = i;
+}
+
+void AMateria::setOffset(unsigned int i)
+{
+	this->_offset = i;
+}
