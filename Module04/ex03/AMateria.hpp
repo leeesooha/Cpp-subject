@@ -5,13 +5,12 @@
 #include <string>
 #include <iostream>
 
+class ICharacter;
+
 class AMateria
 {
 	protected:
 		std::string _type;
-		AMateria *_materias;
-		unsigned int _offset;
-		unsigned int _size;
 	public:
 		AMateria();
 		AMateria(const AMateria& other);
@@ -21,8 +20,6 @@ class AMateria
 		std::string const & getType() const;
 		virtual AMateria* clone() const = 0;
 		virtual void use(ICharacter& target);
-		void setSize(unsigned int i);
-		void setOffset(unsigned int i);
 };
 
 #endif

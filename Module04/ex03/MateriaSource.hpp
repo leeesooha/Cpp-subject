@@ -11,9 +11,12 @@
 class MateriaSource : public IMateriaSource
 {
 	private :
-		AMateria *_inventory[IVENTORY_SIZE];
-		unsigned int _offset;
+		AMateria *_srcInventory[IVENTORY_SIZE];
 	public:
+		MateriaSource();
+		MateriaSource(const std::string name);
+		MateriaSource(const MateriaSource& other);
+		MateriaSource& operator=(const MateriaSource& other);
 		virtual ~MateriaSource();
 		virtual void learnMateria(AMateria* materia);
 		virtual AMateria* createMateria(std::string const & type);

@@ -6,7 +6,7 @@ SRCS = main.cpp \
 
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
-NAME = Brain
+NAME = a.out
 CXX = c++
 MYFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXXFLAGS = $(MYFLAGS) $(INCLUDE)

@@ -3,8 +3,17 @@
 #include "Cat.hpp"
 #include "Brain.hpp"
 
+void leak_check(void)
+{
+    system("leaks a.out");
+}
+
 int main(void)
 {
-    // AAnimal aanimal;
+    atexit(leak_check);
+
+    AAnimal* dog = new Dog;
+    dog->makeSound();
+    delete dog;
     return (0);
 }

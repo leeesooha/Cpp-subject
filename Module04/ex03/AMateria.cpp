@@ -8,8 +8,8 @@ AMateria::AMateria() : _type("DefaultType")
 
 AMateria::AMateria(std::string const & type)
 {
-	std::cout << "[AMateria] " << this->_type << " Constructor called" << std::endl;
 	this->_type = type;
+	std::cout << "[AMateria] " << this->_type << " Constructor called" << std::endl;
 }
 
 AMateria& AMateria::operator=(const AMateria& other)
@@ -40,15 +40,5 @@ std::string const& AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	std::cout << "[AMateria] " << "AMateria's \'use\' function called" << std::endl;
-}
-
-void AMateria::setSize(unsigned int i)
-{
-	this->_size = i;
-}
-
-void AMateria::setOffset(unsigned int i)
-{
-	this->_offset = i;
+	std::cout << "[AMateria] " << target.getName() << "AMateria's \'use\' function called" << std::endl;
 }

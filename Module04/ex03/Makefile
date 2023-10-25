@@ -1,12 +1,13 @@
 SRCS = main.cpp \
 	   AMateria.cpp \
 	   Ice.cpp \
+	   Cure.cpp \
 	   Character.cpp \
 	   MateriaSource.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
-NAME = interface
+NAME = a.out
 CXX = c++
 MYFLAGS = -std=c++98 -Wall -Wextra -Werror
 CXXFLAGS = $(MYFLAGS) $(INCLUDE)
