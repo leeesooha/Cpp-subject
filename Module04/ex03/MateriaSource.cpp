@@ -4,12 +4,12 @@ MateriaSource::MateriaSource() : IMateriaSource()
 {
 	for (size_t i = 0; i < IVENTORY_SIZE; i++)
 		(this->_srcInventory)[i] = NULL;
-	std::cout << "[MateriaSource] " << " Default constructor called" << std::endl;
+	// std::cout << "[MateriaSource] " << " Default constructor called" << std::endl;
 }
 
 MateriaSource& MateriaSource::operator=(const MateriaSource& other)
 {
-	std::cout << "[MateriaSource] " << "Copy assignment operator called" << std::endl;
+	// std::cout << "[MateriaSource] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		for (size_t i = 0; i < IVENTORY_SIZE; i++)
@@ -20,13 +20,13 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& other)
 
 MateriaSource::MateriaSource(const MateriaSource& other)
 {
-	std::cout << "[MateriaSource] " << "Copy constructor called" << std::endl;
+	// std::cout << "[MateriaSource] " << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "[MateriaSource] " << " Destructor called" << std::endl;
+	// std::cout << "[MateriaSource] " << " Destructor called" << std::endl;
 	for (size_t i = 0; i < IVENTORY_SIZE; i++)
 	{
 		if ((this->_srcInventory)[i] != NULL)

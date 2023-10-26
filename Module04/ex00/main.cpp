@@ -7,7 +7,7 @@
 
 void leak_check(void)
 {
-    system("leaks Animal | grep \"leaks for \"");
+    system("leaks a.out");
 }
 
 int main(void)
@@ -26,7 +26,7 @@ int main(void)
     delete meta;
     delete i;
     delete j;
-    std::cout << std::endl << "-------------------------------" << std::endl << std::endl;
+    std::cout << std::endl << "-----------------------------------------" << std::endl << std::endl;
 
     //Wrong Version
     const WrongAnimal* wrongMeta = new WrongAnimal();
@@ -36,6 +36,10 @@ int main(void)
     wrongMeta->makeSound();
     delete wrongMeta;
     delete wrongi;
+    std::cout << std::endl;
 
+    std::cout << std::endl << "-----------------------------------------" << std::endl << std::endl;
+    Animal animal;
+    animal.makeSound();
     return (0);
 }

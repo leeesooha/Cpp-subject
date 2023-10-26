@@ -6,7 +6,7 @@
 
 void leak_check(void)
 {
-    system("leaks Brain");
+    system("leaks a.out");
 }
 
 int main(void)

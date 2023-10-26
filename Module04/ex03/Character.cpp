@@ -6,7 +6,7 @@ Character::Character() : ICharacter()
 	this->_name = "DefaultCharacter";
 	for (size_t i = 0; i < IVENTORY_SIZE; i++)
 		(this->_characterInventory)[i] = NULL;
-	std::cout << "[Character] " << this->_name << " Default constructor called" << std::endl;
+	// std::cout << "[Character] " << this->_name << " Default constructor called" << std::endl;
 }
 
 Character::Character(const std::string name)
@@ -14,12 +14,12 @@ Character::Character(const std::string name)
 	this->_name = name;
 	for (size_t i = 0; i < IVENTORY_SIZE; i++)
 		(this->_characterInventory)[i] = NULL;
-	std::cout << "[Character] " << this->_name << " Constructor called" << std::endl;
+	// std::cout << "[Character] " << this->_name << " Constructor called" << std::endl;
 }
 
 Character& Character::operator=(const Character& other)
 {
-	std::cout << "[AMateria] " << "Copy assignment operator called" << std::endl;
+	// std::cout << "[AMateria] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_name = other._name;
@@ -38,13 +38,13 @@ Character& Character::operator=(const Character& other)
 
 Character::Character(const Character& other)
 {
-	std::cout << "[AMateria] " << "Copy constructor called" << std::endl;
+	// std::cout << "[AMateria] " << "Copy constructor called" << std::endl;
 	*this = other;
 }
 
 Character::~Character()
 {
-	std::cout << "[Character] " << " Destructor called" << std::endl;
+	// std::cout << "[Character] " << " Destructor called" << std::endl;
 	for (size_t i = 0; i < IVENTORY_SIZE; i++)
 	{
 		if ((this->_characterInventory)[i] != NULL)
