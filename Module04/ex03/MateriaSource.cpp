@@ -37,7 +37,6 @@ MateriaSource::~MateriaSource()
 	}
 }
 
-//The learnMateria function's parameter 'AMateria* materia' does not free memory when the inventory is full.
 void MateriaSource::learnMateria(AMateria* materia)
 {
 	size_t idx = 0;
@@ -46,7 +45,10 @@ void MateriaSource::learnMateria(AMateria* materia)
 	while (idx < IVENTORY_SIZE && (this->_srcInventory)[idx] != NULL)
 		idx++;
 	if (idx == IVENTORY_SIZE)
+	{
+		delete materia;
 		return ;
+	}
 	while (jdx < IVENTORY_SIZE && &(this->_srcInventory)[jdx] != &materia)
 		jdx++;
 	if (jdx != IVENTORY_SIZE)

@@ -2,16 +2,17 @@
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
-#include <stdlib.h>
+#include <cstdlib>
+
 
 void leak_check(void)
 {
-    system("leaks a.out");
+    std::system("leaks a.out");
 }
 
 int main(void)
 {
-    atexit(leak_check);
+    std::atexit(leak_check);
 
     IMateriaSource* src = new MateriaSource();
     src->learnMateria(new Ice());

@@ -12,8 +12,8 @@ class WrongCat : public WrongAnimal
         WrongCat();
         WrongCat(const WrongCat &other);
         WrongCat& operator=(const WrongCat& other);
-        virtual ~WrongCat();
-        virtual void makeSound() const;
+        ~WrongCat();
+        void makeSound() const;
 };
 
 #endif
