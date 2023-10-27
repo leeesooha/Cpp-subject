@@ -4,7 +4,6 @@
 #include "Cure.hpp"
 #include <cstdlib>
 
-
 void leak_check(void)
 {
     std::system("leaks a.out");
@@ -43,9 +42,10 @@ int main(void)
             tmp2 = src2->createMateria("ice");
         else
             tmp2 = src2->createMateria("cure");
-        me2->equip(tmp2);
-        if (i >= 4)
+        if (((Character *)me2)->IsFull() == true)
             delete tmp2;
+        else
+            me2->equip(tmp2);
     }
     ICharacter* bob2 = new Character("bob");
     me2->use(0, *bob2);

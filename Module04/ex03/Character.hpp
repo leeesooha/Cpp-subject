@@ -23,6 +23,7 @@ class Character : public ICharacter
 		virtual void equip(AMateria* m);
 		virtual void unequip(int idx);
 		virtual void use(int idx, ICharacter& target);
+		bool IsFull(void) const;
 };
 
 #endif

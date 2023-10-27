@@ -88,3 +88,15 @@ void Character::use(int idx, ICharacter& target)
 		return ;
 	(this->_characterInventory)[idx]->use(target);
 }
+
+bool Character::IsFull(void) const
+{
+	size_t i = 0;
+	while (i < 4)
+	{
+		if ((this->_characterInventory)[i] == NULL)
+			return (false);
+		i++;
+	}
+	return (true);
+}

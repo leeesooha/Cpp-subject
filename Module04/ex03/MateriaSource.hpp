@@ -15,7 +15,6 @@ class MateriaSource : public IMateriaSource
 		AMateria *_srcInventory[IVENTORY_SIZE];
 	public:
 		MateriaSource();
-		MateriaSource(const std::string name);
 		MateriaSource(const MateriaSource& other);
 		MateriaSource& operator=(const MateriaSource& other);
 		virtual ~MateriaSource();

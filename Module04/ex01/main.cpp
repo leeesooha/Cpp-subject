@@ -2,16 +2,16 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "Brain.hpp"
-#include <stdlib.h>
+#include <cstdlib>
 
 void leak_check(void)
 {
-    system("leaks a.out");
+    std::system("leaks a.out");
 }
 
 int main(void)
 {
-    atexit(leak_check);
+    std::atexit(leak_check);
 
     // --------------------subject copy test--------------------
     std::cout << "------------------------subject copy test---------------------" << std::endl;
