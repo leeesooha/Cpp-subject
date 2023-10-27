@@ -2,19 +2,19 @@
 
 Brain::Brain()
 {
+	std::cout << "[Brain] " << "Default constructor called" << std::endl;
 	for (size_t i = 0; i < 100; i++)
 		this->_ideas[i] = "";
-	std::cout << "[Brain] " << "Default constructor called" << std::endl;
 }
 
 Brain& Brain::operator=(const Brain& other)
 {
+	std::cout << "[Brain] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		for (size_t i = 0; i < 100; i++)
 			this->_ideas[i] = other._ideas[i];
 	}
-	std::cout << "[Brain] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 

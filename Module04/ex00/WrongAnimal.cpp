@@ -12,11 +12,11 @@ WrongAnimal::WrongAnimal(std::string type) : _type(type)
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other)
 {
+	std::cout << "[WrongAnimal] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_type = other._type;
 	}
-	std::cout << "[WrongAnimal] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 

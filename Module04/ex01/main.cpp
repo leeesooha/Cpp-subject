@@ -58,5 +58,10 @@ int main(void)
     delete puppy;
     delete loopy;
     std::cout << std::endl;
+
+    Cat bigcat;
+    Cat smallcat;
+    bigcat = smallcat;
+    std::cout << bigcat.getBrain() << "\n" << smallcat.getBrain() << std::endl;
     return (0);
 }

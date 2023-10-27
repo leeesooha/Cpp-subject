@@ -2,17 +2,17 @@
 
 WrongCat::WrongCat() : WrongAnimal()
 {
-	this->_type = "WrongCat";
 	std::cout << "[WrongCat] " << "Default constructor called" << std::endl;
+	this->_type = "WrongCat";
 }
 
 WrongCat& WrongCat::operator=(const WrongCat& other)
 {
+	std::cout << "[WrongCat] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_type = other._type;
 	}
-	std::cout << "[WrongCat] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 

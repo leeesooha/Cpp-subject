@@ -2,17 +2,17 @@
 
 Cat::Cat() : Animal()
 {
-	this->_type = "Cat";
 	std::cout << "[Cat] " << "Default constructor called" << std::endl;
+	this->_type = "Cat";
 }
 
 Cat& Cat::operator=(const Cat& other)
 {
+	std::cout << "[Cat] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_type = other._type;
 	}
-	std::cout << "[Cat] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 

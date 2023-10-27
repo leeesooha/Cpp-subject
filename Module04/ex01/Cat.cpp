@@ -3,13 +3,14 @@
 
 Cat::Cat() : Animal()
 {
+	std::cout << "[Cat] " << "Default constructor called" << std::endl;
 	this->_type = "Cat";
 	this->_brain = new Brain();
-	std::cout << "[Cat] " << "Default constructor called" << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other)
 {
+	std::cout << "[Cat] " << "Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_type = other._type;
@@ -17,21 +18,20 @@ Cat& Cat::operator=(const Cat& other)
 		this->_brain = new Brain();
 		*this->_brain = *(other.getBrain());
 	}
-	std::cout << "[Cat] " << "Copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 Cat::Cat(const Cat &other) : Animal()
 {
-	this->_brain = new Brain();
 	std::cout << "[Cat] " << "Copy constructor called" << std::endl;
+	this->_brain = new Brain();
 	*this = other;
 }
 
 Cat::~Cat()
 {
-	delete (this->_brain);
 	std::cout << "[Cat] " << " Destructor called" << std::endl;
+	delete (this->_brain);
 }
 
 void Cat::makeSound() const
