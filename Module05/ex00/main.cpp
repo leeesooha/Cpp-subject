@@ -1,14 +1,18 @@
 #include "Bureaucrat.hpp"
-#include <cstdlib>
-
-void leak_check(void)
-{
-    std::system("leaks a.out");
-}
 
 int main(void)
 {
-    std::atexit(leak_check);
-
+    try {
+        Bureaucrat person("romeo", 10);
+        std::cout << person;
+        person.decrementGrade();
+        std::cout << person;
+        person.incrementGrade();
+        std::cout << person;
+        person.incrementGrade();
+        std::cout << person;
+    } catch (std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
     return (0);
 }
