@@ -69,6 +69,9 @@ std::ostream& operator<<(std::ostream& out, const Form& person)
 void Form::beSinged(Bureaucrat& person)
 {
 	if (person.getGrade() > this->getSignGrade())
+	{
+		this->_signed = false;
 		throw Bureaucrat::GradeTooLowException();
+	}
 	this->_signed = true;
 }
