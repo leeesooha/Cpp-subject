@@ -7,23 +7,20 @@
 #include <iostream>
 #include <exception>
 
-enum Grade{
+enum ShrubberyGrade{
     SHRUBBERY_SIGNGRADE = 145,
-    SHRUBBERY_EXECGRADE = 137,
-    ROBOT_SIGNGRADE = 72,
-    ROBOT_EXECGRADE = 45,
-    PARDON_SIGNGRADE = 25,
-    PARDON_EXECGRADE = 5
+    SHRUBBERY_EXECGRADE = 137
 };
 
 class ShrubberyCreationForm : public AForm
 {
     public :
-        ShrubberyCreationForm(std::string name);
+        ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm(const ShrubberyCreationForm &other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         virtual ~ShrubberyCreationForm();
         virtual void execute(Bureaucrat const & executor) const;
+        std::string getTarget() const;
         class GradeTooHighException : public std::exception
         {
             public :
@@ -35,10 +32,11 @@ class ShrubberyCreationForm : public AForm
                 virtual const char* what() const throw();
         };
     private :
+        std::string _target;
         ShrubberyCreationForm();
 
 };
 
-std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& person);
+std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& form);
 
 #endif
