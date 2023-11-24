@@ -21,7 +21,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& o
 	return (*this);
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other) : AForm("robotomy request", ROBOT_SIGNGRADE, ROBOT_EXECGRADE), _target("default_target")
 {
 	*this = other;
 }

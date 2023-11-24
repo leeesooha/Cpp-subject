@@ -21,7 +21,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other)
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other) : AForm("presidential pardon", PARDON_SIGNGRADE, PARDON_EXECGRADE), _target("default_target")
 {
 	*this = other;
 }

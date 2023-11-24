@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include <exception>
+#include <cstdlib>
 
 enum ShrubberyGrade{
     SHRUBBERY_SIGNGRADE = 145,

@@ -21,7 +21,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other) : AForm("shrubbery creation", SHRUBBERY_SIGNGRADE, SHRUBBERY_EXECGRADE), _target("default_target")
 {
 	*this = other;
 }
@@ -60,7 +60,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	if (this->getSigned() == false || executor.getGrade() > this->getExecGrade())
 		throw Bureaucrat::GradeTooLowException();
-	std::ofstream outputFile(this->getTarget() + "_shrubbery");
+	std::ofstream outputFile((this->getTarget() + "_shrubbery").c_str());
 
 	if (!outputFile.is_open())
 	{
