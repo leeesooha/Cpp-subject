@@ -2,12 +2,10 @@
 
 Form::Form() : _name("Default"), _signGrade(150), _execGrade(150), _signed(false)
 {
-	std::cout << "[Form:" << this->_name << "] Default constructor called" << std::endl;
 }
 
 Form::Form(std::string name, int signGrade, int execGrade) : _name(name), _signGrade(signGrade), _execGrade(execGrade), _signed(false)
 {
-	std::cout << "[Form:" << this->_name << "] Constructor called" << std::endl;
 	if (_signGrade < 1 || _execGrade < 1)
 		throw Form::GradeTooHighException();
 	else if (_signGrade > 150 || _execGrade > 150)
@@ -16,7 +14,6 @@ Form::Form(std::string name, int signGrade, int execGrade) : _name(name), _signG
 
 Form& Form::operator=(const Form& other)
 {
-	std::cout << "[Form:" << this->_name << "] Copy assignment operator called" << std::endl;
 	if (this != &other)
 	{
 		this->_signed = other._signed;
@@ -26,13 +23,11 @@ Form& Form::operator=(const Form& other)
 
 Form::Form(const Form &other) : _name("Default"), _signGrade(150), _execGrade(150)
 {
-	std::cout << "[Form:" << this->_name << "] Copy constructor called" << std::endl;
 	*this = other;
 }
 
 Form::~Form()
 {
-	std::cout << "[Form:" << this->_name << "] Destructor called" << std::endl;
 }
 
 const char* Form::GradeTooHighException::what() const throw()

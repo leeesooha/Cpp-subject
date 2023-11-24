@@ -4,6 +4,7 @@ int main(void)
 {
     try {
         Bureaucrat person("romeo", 10);
+
         std::cout << person;
         person.decrementGrade();
         std::cout << person;
