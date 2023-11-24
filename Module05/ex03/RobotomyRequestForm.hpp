@@ -17,6 +17,7 @@ class RobotomyRequestForm : public AForm
 {
     public :
         RobotomyRequestForm(std::string target);
+        RobotomyRequestForm();
         RobotomyRequestForm(const RobotomyRequestForm &other);
         RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
         virtual ~RobotomyRequestForm();
@@ -34,10 +35,8 @@ class RobotomyRequestForm : public AForm
         };
     private :
         std::string _target;
-        RobotomyRequestForm();
-
 };
 
-std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& person);
+std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& form);
 
 #endif

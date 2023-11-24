@@ -16,6 +16,7 @@ enum PresidentialGrade{
 class PresidentialPardonForm : public AForm
 {
     public :
+        PresidentialPardonForm();
         PresidentialPardonForm(std::string target);
         PresidentialPardonForm(const PresidentialPardonForm &other);
         PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
@@ -33,11 +34,9 @@ class PresidentialPardonForm : public AForm
                 virtual const char* what() const throw();
         };
     private :
-        PresidentialPardonForm();
         std::string _target;
-
 };
 
-std::ostream& operator<<(std::ostream& out, const PresidentialPardonForm& person);
+std::ostream& operator<<(std::ostream& out, const PresidentialPardonForm& form);
 
 #endif

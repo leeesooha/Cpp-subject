@@ -11,24 +11,27 @@
 int main(void)
 {
     try {
-        Bureaucrat person("romeo", 20);
-        ShrubberyCreationForm docTree("3tree");
+        Bureaucrat person("romeo", 10);
+        ShrubberyCreationForm shruForm("home");
+
+        for (int i = 0; i < 5; i++)
+            person.incrementGrade();
         std::cout << person;
-        std::cout << docTree;
-        person.signForm(docTree);
-        person.executeForm(docTree);
+        std::cout << shruForm;
+        person.signForm(shruForm);
+        person.executeForm(shruForm);
         std::cout << std::endl;
 
-        RobotomyRequestForm robo("terminate");
-        person.signForm(robo);
-        person.executeForm(robo);
-        std::cout << robo;
+        RobotomyRequestForm roboForm("Arnold");
+        person.signForm(roboForm);
+        person.executeForm(roboForm);
+        std::cout << roboForm;
         std::cout << std::endl;
 
-        PresidentialPardonForm pardon("pardonByZaphod");
-        person.signForm(pardon);
-        person.executeForm(pardon);
-        std::cout << pardon;
+        PresidentialPardonForm pardonForm("Jane");
+        person.signForm(pardonForm);
+        person.executeForm(pardonForm);
+        std::cout << pardonForm;
     } catch (std::exception& e) {
         std::cout << e.what() << std::endl;
     }

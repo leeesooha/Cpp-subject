@@ -1,6 +1,6 @@
 #include "AForm.hpp"
 
-AForm::AForm() : _name("Default"), _signGrade(GRADE_MAX), _execGrade(GRADE_MAX), _signed(false)
+AForm::AForm() : _name("Default_Form"), _signGrade(GRADE_MAX), _execGrade(GRADE_MAX), _signed(false)
 {
 }
 
@@ -21,7 +21,7 @@ AForm& AForm::operator=(const AForm& other)
 	return (*this);
 }
 
-AForm::AForm(const AForm &other) : _name("Default"), _signGrade(150), _execGrade(150)
+AForm::AForm(const AForm &other) : _name("Default_Form"), _signGrade(150), _execGrade(150)
 {
 	*this = other;
 }
@@ -55,9 +55,9 @@ int AForm::getExecGrade() const
 	return (this->_execGrade);
 }
 
-std::ostream& operator<<(std::ostream& out, const AForm& person)
+std::ostream& operator<<(std::ostream& out, const AForm& form)
 {
-    out << person.getName() << ", " << "ShrubberyCreationForm sign_grade " << person.getSignGrade() << ", " << "exec_grade " << person.getExecGrade() << ", signed " << std::boolalpha << person.getSigned() << "." << std::endl;
+    out << form.getName() << ", " << "Form sign_grade " << form.getSignGrade() << ", " << "exec_grade " << form.getExecGrade() << ", signed " << std::boolalpha << form.getSigned() << "." << std::endl;
 	return (out);
 }
 

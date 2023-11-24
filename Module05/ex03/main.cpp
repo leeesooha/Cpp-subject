@@ -16,7 +16,7 @@ int main(void)
         std::cout << person;
         std::cout << std::endl;
 
-        ShrubberyCreationForm shruForm("home");
+        ShrubberyCreationForm shruForm("dfdf");
         person.signForm(shruForm);
         person.executeForm(shruForm);
         std::cout << shruForm;
@@ -36,7 +36,7 @@ int main(void)
 
         Intern internPerson;
         AForm *forms;
-        forms = internPerson.makeForm("robotomy request", "jack");
+        forms = internPerson.makeForm("robotomdy request", "jack");
         if (forms == NULL)
             std::exit (1);
         person.signForm(*forms);

@@ -30,20 +30,26 @@ AForm *Intern::makeForm(std::string formName, std::string target)
 	for (size_t i = 0; i < FORM_TOTAL_COUNT; i++)
 		if (forms[i] == formName)
 			level_index = i;
-	switch (level_index)
-	{
-		case 0 :
-			form = new ShrubberyCreationForm(target);
-			break ;
-		case 1 :
-			form = new RobotomyRequestForm(target);
-			break ;
-		case 2 :
-			form = new PresidentialPardonForm(target);
-			break ;
-		default :
-			std::cout << "The " << formName << " form does not exist." << std::endl;
-			break ;
-	}
+	try {
+		switch (level_index)
+		{
+			case 0 :
+				form = new ShrubberyCreationForm(target);
+				break ;
+			case 1 :
+				form = new RobotomyRequestForm(target);
+				break ;
+			case 2 :
+				form = new PresidentialPardonForm(target);
+				break ;
+			default :
+				std::cout << "The " << formName << " form does not exist." << std::endl;
+				break ;
+		}
+	} catch (const std::bad_alloc& e)
+    {
+        std::cerr << "Dynamic allocation failed: " << e.what() << std::endl;
+        std::exit(1);
+    }
 	return (form);
 }

@@ -55,9 +55,9 @@ int AForm::getExecGrade() const
 	return (this->_execGrade);
 }
 
-std::ostream& operator<<(std::ostream& out, const AForm& person)
+std::ostream& operator<<(std::ostream& out, const AForm& form)
 {
-    out << person.getName() << ", " << "ShrubberyCreationForm sign_grade " << person.getSignGrade() << ", " << "exec_grade " << person.getExecGrade() << ", signed " << std::boolalpha << person.getSigned() << "." << std::endl;
+    out << form.getName() << ", " << "ShrubberyCreationForm sign_grade " << form.getSignGrade() << ", " << "exec_grade " << form.getExecGrade() << ", signed " << std::boolalpha << form.getSigned() << "." << std::endl;
 	return (out);
 }
 

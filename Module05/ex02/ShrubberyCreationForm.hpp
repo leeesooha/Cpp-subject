@@ -19,10 +19,12 @@ enum Grade{
 class ShrubberyCreationForm : public AForm
 {
     public :
-        ShrubberyCreationForm(std::string name);
+        ShrubberyCreationForm();
+        ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm(const ShrubberyCreationForm &other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
         virtual ~ShrubberyCreationForm();
+        std::string getTarget() const;
         virtual void execute(Bureaucrat const & executor) const;
         class GradeTooHighException : public std::exception
         {
@@ -35,10 +37,9 @@ class ShrubberyCreationForm : public AForm
                 virtual const char* what() const throw();
         };
     private :
-        ShrubberyCreationForm();
-
+        std::string _target;
 };
 
-std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& person);
+std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& form);
 
 #endif

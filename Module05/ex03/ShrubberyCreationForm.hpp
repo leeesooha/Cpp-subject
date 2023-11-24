@@ -15,6 +15,7 @@ enum ShrubberyGrade{
 class ShrubberyCreationForm : public AForm
 {
     public :
+        ShrubberyCreationForm();
         ShrubberyCreationForm(std::string target);
         ShrubberyCreationForm(const ShrubberyCreationForm &other);
         ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
@@ -33,7 +34,6 @@ class ShrubberyCreationForm : public AForm
         };
     private :
         std::string _target;
-        ShrubberyCreationForm();
 
 };
 

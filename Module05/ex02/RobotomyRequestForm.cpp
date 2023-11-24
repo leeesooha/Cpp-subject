@@ -1,10 +1,10 @@
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm() : AForm("Default_ShrubberyName", ROBOT_SIGNGRADE, ROBOT_EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm() : AForm("robotomy request", ROBOT_SIGNGRADE, ROBOT_EXECGRADE), _target("default_target")
 {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string name) : AForm(name, ROBOT_SIGNGRADE, ROBOT_EXECGRADE)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("robotomy request", ROBOT_SIGNGRADE, ROBOT_EXECGRADE), _target(target)
 {
 	if (AForm::getSignGrade() < GRADE_MIN || AForm::getExecGrade() < GRADE_MIN)
 		throw RobotomyRequestForm::GradeTooHighException();
@@ -40,9 +40,14 @@ const char* RobotomyRequestForm::GradeTooLowException::what() const throw()
 	return ("grade too low");
 }
 
-std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& person)
+std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& form)
 {
-    out << person.getName() << ", " << "RobotomyRequestForm sign_grade " << person.getSignGrade() << ", " << "exec_grade " << person.getExecGrade() << ", signed " << std::boolalpha << person.getSigned() << "." << std::endl;
+    out << form.getName() << ", " \
+	<< "RobotomyRequestForm sign_grade " << form.getSignGrade() << ", " \
+	<< "exec_grade " << form.getExecGrade() \
+	<< ", signed " << std::boolalpha << form.getSigned() \
+	<< ", target " << form.getTarget() \
+	<< "." << std::endl;
 	return (out);
 }
 
@@ -53,7 +58,12 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	std::cout << "drilling noises. . ." << std::endl;
 	srand(static_cast<unsigned int>(time(NULL)));
 	if (rand() % 2 == 0)
-		std::cout << this->getName() << " robotomized Success!" << std::endl;
+		std::cout << this->getTarget() << " robotomized Success!" << std::endl;
 	else
-		std::cout << this->getName() << " robotomized Fail!" << std::endl;
+		std::cout << this->getTarget() << " robotomized Fail!" << std::endl;
+}
+
+std::string RobotomyRequestForm::getTarget() const
+{
+	return (this->_target);
 }

@@ -3,7 +3,6 @@
 
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
-#include <fstream>
 #include <string>
 #include <iostream>
 #include <exception>
@@ -11,10 +10,12 @@
 class PresidentialPardonForm : public AForm
 {
     public :
-        PresidentialPardonForm(std::string name);
+        PresidentialPardonForm();
+        PresidentialPardonForm(std::string target);
         PresidentialPardonForm(const PresidentialPardonForm &other);
         PresidentialPardonForm& operator=(const PresidentialPardonForm& other);
         virtual ~PresidentialPardonForm();
+        std::string getTarget() const;
         virtual void execute(Bureaucrat const & executor) const;
         class GradeTooHighException : public std::exception
         {
@@ -27,10 +28,9 @@ class PresidentialPardonForm : public AForm
                 virtual const char* what() const throw();
         };
     private :
-        PresidentialPardonForm();
-
+        std::string _target;
 };
 
-std::ostream& operator<<(std::ostream& out, const PresidentialPardonForm& person);
+std::ostream& operator<<(std::ostream& out, const PresidentialPardonForm& form);
 
 #endif

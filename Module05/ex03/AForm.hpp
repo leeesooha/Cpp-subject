@@ -40,6 +40,6 @@ class AForm
         bool _signed;
 };
 
-std::ostream& operator<<(std::ostream& out, const AForm& person);
+std::ostream& operator<<(std::ostream& out, const AForm& form);
 
 #endif

@@ -3,7 +3,6 @@
 
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
-#include <fstream>
 #include <string>
 #include <iostream>
 #include <exception>
@@ -11,10 +10,12 @@
 class RobotomyRequestForm : public AForm
 {
     public :
-        RobotomyRequestForm(std::string name);
+        RobotomyRequestForm();
+        RobotomyRequestForm(std::string target);
         RobotomyRequestForm(const RobotomyRequestForm &other);
         RobotomyRequestForm& operator=(const RobotomyRequestForm& other);
         virtual ~RobotomyRequestForm();
+        std::string getTarget() const;
         virtual void execute(Bureaucrat const & executor) const;
         class GradeTooHighException : public std::exception
         {
@@ -27,10 +28,9 @@ class RobotomyRequestForm : public AForm
                 virtual const char* what() const throw();
         };
     private :
-        RobotomyRequestForm();
-
+        std::string _target;
 };
 
-std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& person);
+std::ostream& operator<<(std::ostream& out, const RobotomyRequestForm& form);
 
 #endif

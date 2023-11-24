@@ -1,10 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm() : AForm("Default_ShrubberyName", SHRUBBERY_SIGNGRADE, SHRUBBERY_EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm() : AForm("shrubbery creation", SHRUBBERY_SIGNGRADE, SHRUBBERY_EXECGRADE), _target("default_target")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name) : AForm(name, SHRUBBERY_SIGNGRADE, SHRUBBERY_EXECGRADE)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("shrubbery creation", SHRUBBERY_SIGNGRADE, SHRUBBERY_EXECGRADE), _target(target)
 {
 	if (AForm::getSignGrade() < GRADE_MIN || AForm::getExecGrade() < GRADE_MIN)
 		throw ShrubberyCreationForm::GradeTooHighException();
@@ -40,9 +40,14 @@ const char* ShrubberyCreationForm::GradeTooLowException::what() const throw()
 	return ("grade too low");
 }
 
-std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& person)
+std::ostream& operator<<(std::ostream& out, const ShrubberyCreationForm& form)
 {
-    out << person.getName() << ", " << "ShrubberyCreationForm sign_grade " << person.getSignGrade() << ", " << "exec_grade " << person.getExecGrade() << ", signed " << std::boolalpha << person.getSigned() << "." << std::endl;
+    out << form.getName() << ", " \
+	<< "ShrubberyCreationForm sign_grade " << form.getSignGrade() << ", " \
+	<< "exec_grade " << form.getExecGrade() \
+	<< ", signed " << std::boolalpha << form.getSigned() \
+	<< ", target " << form.getTarget() \
+	<< "." << std::endl;
 	return (out);
 }
 
@@ -50,7 +55,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
 	if (this->getSigned() == false || executor.getGrade() > this->getExecGrade())
 		throw Bureaucrat::GradeTooLowException();
-	std::ofstream outputFile("Default_shrubbery");
+	std::ofstream outputFile(this->getTarget() + "_shrubbery");
 
 	if (!outputFile.is_open())
 	{
@@ -68,4 +73,9 @@ void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 	outputFile << "       |.|        | |         | |" << std::endl;
 	outputFile << "_//_\\\\/ .\\_/\\_/__/  \\,_\\/__\\\\/.  \\_\\/\\/__/_";
 	outputFile.close();
+}
+
+std::string ShrubberyCreationForm::getTarget() const
+{
+	return (this->_target);
 }
