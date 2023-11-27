@@ -3,6 +3,15 @@
 
 #include <string>
 #include <iostream>
+#include <limits>
+
+enum type {
+    NONE = 0,
+    CHAR,
+    INT,
+    FLOAT,
+    DOUBLE
+};
 
 class ScalarConverter
 {
@@ -13,7 +22,8 @@ class ScalarConverter
         static double getDouble();
         static void printAllValue(std::string value);
         static bool typeChk(std::string value);
-        static bool myStrIsprint(std::string str);
+        static bool myStrIsspace(std::string str);
+        static void charConvertToOther();
     private :
         ScalarConverter();
         ScalarConverter(const ScalarConverter &other);
@@ -27,7 +37,7 @@ class ScalarConverter
         static std::string _floatFlg;
         static double _doubleNum;
         static std::string _doubleFlg;
-        static std::string _valueType;
+        static int _valueType;
 };
 
 #endif

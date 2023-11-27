@@ -8,7 +8,7 @@ std::string ScalarConverter::_characterFlg = "NONPRINTABLE";
 std::string ScalarConverter::_integerFlg = "NONPRINTABLE";
 std::string ScalarConverter::_floatFlg = "NONPRINTABLE";
 std::string ScalarConverter::_doubleFlg = "NONPRINTABLE";
-std::string ScalarConverter::_valueType = "NONE";
+int ScalarConverter::_valueType = NONE;
 
 ScalarConverter::ScalarConverter()
 {
@@ -32,6 +32,7 @@ ScalarConverter::~ScalarConverter()
 
 char ScalarConverter::getChar()
 {
+	if ()
 	return (_charater);
 }
 
@@ -50,7 +51,7 @@ double ScalarConverter::getDouble()
 	return (_doubleNum);
 }
 
-bool ScalarConverter::myStrIsprint(std::string str)
+bool ScalarConverter::myStrIsspace(std::string str)
 {
 	int length = str.length();
 
@@ -62,6 +63,11 @@ bool ScalarConverter::myStrIsprint(std::string str)
 	return (true);
 }
 
+void ScalarConverter::charConvertToOther()
+{
+
+}
+
 bool ScalarConverter::typeChk(std::string value)
 {
 	int	length = value.length();
@@ -69,16 +75,34 @@ bool ScalarConverter::typeChk(std::string value)
 	{
 		if (std::isprint(value.at(0)) == 0)
 			return (false);
-		_valueType = "CHAR";
+		_valueType = CHAR;
 		return (true);
 	}
-	if (myStrIsprint(value) == false)
+	if (myStrIsspace(value) == false)
 		return (false);
-	//char 타입 감지 완료, whitespace 문자 거르기 완료
-	//int, float, double 감지할차례임.
-	char *pos = NULL;
-	double num = std::strtod(value.c_str(), &pos);
-	std::cout << num << std::endl;
+	char *offset = NULL;
+	double num = std::strtod(value.c_str(), &offset);
+	std::cout << "1: " << num << std::endl;
+	std::string cppOffset = offset;
+	if (!(cppOffset.length() == 0 || (cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0)))
+		return (false);
+	if ((cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0))
+	{
+		_valueType = FLOAT;
+		return (true);
+	}
+	if (value.find('.') != std::string::npos)
+	{
+		_valueType = DOUBLE;
+		return (true);
+	}
+	_valueType = INT;
+	return (true);
+	// if (num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max())
+	// {
+	// 	_valueType = "INT";
+	// 	return (true);
+	// }
 	return (true);
 }
 
@@ -89,31 +113,18 @@ void ScalarConverter::printAllValue(std::string value)
 		std::cout << "argv Error" << std::endl;
 		return ;
 	}
-	std::cout << "char: ";
-	if (_characterFlg == "NONPRINTABLE")
-		std::cout << "Non displayable";
-	else
-		std::cout << "'" << getChar() << "'";
-	std::cout << std::endl;
-
-	std::cout << "int: ";
-	if (_integerFlg == "NONPRINTABLE")
-		std::cout << "Non displayable";
-	else
-		std::cout << getFloat();
-	std::cout << std::endl;
-
-	std::cout << "float: ";
-	if (_floatFlg == "NONPRINTABLE")
-		std::cout << "Non displayable";
-	else
-		std::cout << getDouble();
-	std::cout << std::endl;
-
-	std::cout << "double: ";
-	if (_doubleFlg == "NONPRINTABLE")
-		std::cout << "Non displayable";
-	else
-		std::cout << getInt();
-	std::cout << std::endl;
+	// switch (expression)
+	// {
+	// case /* constant-expression */:
+	// 	/* code */
+	// 	break;
+	
+	// default:
+	// 	break;
+	// }
+	std::cout << "type : " << _valueType << std::endl;
+	std::cout << "char: '" << getChar() << "'" << std::endl;
+	std::cout << "int: " << getInt() << std::endl;
+	std::cout << "float: " << getFloat() << std::endl;
+	std::cout << "double: " << getDouble() << std::endl;
 }
