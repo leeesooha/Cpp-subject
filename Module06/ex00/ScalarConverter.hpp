@@ -4,13 +4,21 @@
 #include <string>
 #include <iostream>
 #include <limits>
+#include <iomanip>
 
 enum type {
     NONE = 0,
     CHAR,
     INT,
     FLOAT,
-    DOUBLE
+    DOUBLE,
+    NANFLAOT,
+    NANDOUBLE,
+    INFINITYFLOAT,
+    INFINITYDOUBLE,
+    OVERFLOWINT,
+    OVERFLOWCHAR,
+    NONDISPLAYABLE
 };
 
 class ScalarConverter
@@ -24,20 +32,22 @@ class ScalarConverter
         static bool typeChk(std::string value);
         static bool myStrIsspace(std::string str);
         static void charConvertToOther();
+        static void intConvertToOther();
+        static void floatConvertToOther();
+        static void doubleConvertToOther();
     private :
         ScalarConverter();
         ScalarConverter(const ScalarConverter &other);
         ScalarConverter& operator=(const ScalarConverter& other);
         virtual ~ScalarConverter();
-        static char _charater;
-        static std::string _characterFlg;
+        static char _character;
         static int _integerNum;
-        static std::string _integerFlg;
         static float _floatNum;
-        static std::string _floatFlg;
         static double _doubleNum;
-        static std::string _doubleFlg;
         static int _valueType;
+        static int _infinitySign;
+        static int _overflow;
+        static int _characterFlg;
 };
 
 #endif
