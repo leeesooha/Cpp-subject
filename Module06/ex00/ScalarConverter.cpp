@@ -333,7 +333,7 @@ void ScalarConverter::printAllValue(std::string value)
 			doubleConvertToOther();
 			break ;
 	}
-	testPrintType();
+	// testPrintType();
 	printChar();
 	printInt();
 	printFloat();
