@@ -7,7 +7,8 @@ double ScalarConverter::_doubleNum;
 int	ScalarConverter::_infinitySign;
 int ScalarConverter::_overflow;
 int ScalarConverter::_characterFlg;
-int ScalarConverter::_valueType = NONE;
+int ScalarConverter::_valueType;
+std::string ScalarConverter::_value;
 
 ScalarConverter::ScalarConverter()
 {
@@ -49,16 +50,98 @@ double ScalarConverter::getDouble()
 	return (_doubleNum);
 }
 
-bool ScalarConverter::myStrIsspace(std::string str)
+void ScalarConverter::testPrintType()
 {
-	int length = str.length();
-
-	for (int i = 0; i < length; i++)
+	switch (_valueType)
 	{
-		if (std::isspace(str.at(i)) != 0)
-			return (false);	
+		case CHAR :
+			std::cout << "type : " << "char" << std::endl << std::endl;
+			break ;
+		case INT :
+			std::cout << "type : " << "int" << std::endl << std::endl;
+			break ;
+		case FLOAT :
+			std::cout << "type : " << "float" << std::endl << std::endl;
+			break ;
+		case DOUBLE :
+			std::cout << "type : " << "double" << std::endl << std::endl;
+			break ;
+		case NANDOUBLE :
+			std::cout << "type : " << "nan" << std::endl << std::endl;
+			break ;
+		case NANFLAOT :
+			std::cout << "type : " << "nanf" << std::endl << std::endl;
+			break ;
+		case INFINITYFLOAT :
+			std::cout << "type : " << "inff" << std::endl << std::endl;
+			break ;
+		case INFINITYDOUBLE :
+			std::cout << "type : " << "inf" << std::endl << std::endl;
+			break ;
 	}
-	return (true);
+}
+
+void ScalarConverter::printChar()
+{
+	if ( _characterFlg == NONDISPLAYABLE)
+		std::cout << "char: " << "Non displayable" << std::endl;
+	else if (_characterFlg == OVERFLOWCHAR || _valueType == NANDOUBLE || _valueType == NANFLAOT || _valueType == INFINITYFLOAT || _valueType == INFINITYDOUBLE || _overflow == OVERFLOWINT)
+		std::cout << "char: " << "impossible" << std::endl;
+	else
+		std::cout << "char: '" << getChar() << "'" << std::endl;
+}
+
+void ScalarConverter::printInt()
+{
+	if (_overflow == INFINITYFLOAT || _overflow == INFINITYDOUBLE || _valueType == NANDOUBLE || _valueType == NANFLAOT || _valueType == INFINITYFLOAT || _valueType == INFINITYDOUBLE || _overflow == OVERFLOWINT)
+		std::cout << "int: " << "impossible" << std::endl;
+	else
+		std::cout << "int: " << getInt() << std::endl;
+}
+
+void ScalarConverter::printFloat()
+{
+	if (_valueType == NANDOUBLE || _valueType == NANFLAOT)
+		std::cout << "float: " << "nanf" << std::endl;
+	else if (_valueType == INFINITYFLOAT || _valueType == INFINITYDOUBLE)
+	{
+		std::string signstr;
+		if (_infinitySign == -1)
+			signstr = "-";
+		std::cout << "float: " << signstr << "inff" << std::endl;
+	}
+	else if (_overflow == OVERFLOWINT)
+		std::cout << "float: " << "impossible" << std::endl;
+	else
+	{
+		size_t printCnt;
+		size_t dotPoint = _value.find('.');
+		size_t isfloat = 0;
+		if (_value.find('f') != std::string::npos)
+			isfloat = 1;
+		if (dotPoint == std::string::npos || _value.length() - isfloat - dotPoint == 1)
+			printCnt = 1;
+		else
+			printCnt = static_cast<size_t>(_value.length() - isfloat - dotPoint - 1);
+		std::cout << "float: " << std::fixed << std::setprecision(printCnt) <<  getFloat() << "f" << std::endl;
+	}
+}
+
+void ScalarConverter::printDouble()
+{
+	if (_valueType == NANDOUBLE || _valueType == NANFLAOT)
+		std::cout << "double: " << "nan" << std::endl;
+	else if (_valueType == INFINITYFLOAT || _valueType == INFINITYDOUBLE)
+	{
+		std::string signstr;
+		if (_infinitySign == -1)
+			signstr = "-";
+		std::cout << "double: " << signstr << "inf" << std::endl;
+	}
+	else if (_overflow == OVERFLOWINT)
+		std::cout << "double: " << "impossible" << std::endl;
+	else
+		std::cout << "double: " << getDouble() << std::endl;
 }
 
 void ScalarConverter::charConvertToOther()
@@ -76,7 +159,7 @@ void ScalarConverter::intConvertToOther()
 	if (std::isprint(_character) == 0)
 		_characterFlg = NONDISPLAYABLE;
 	if (!(_integerNum >= std::numeric_limits<char>::min() && _integerNum <= std::numeric_limits<char>::max()))
-		_characterFlg = NONDISPLAYABLE;
+		_characterFlg = OVERFLOWCHAR;
 }
 
 void ScalarConverter::floatConvertToOther()
@@ -86,6 +169,16 @@ void ScalarConverter::floatConvertToOther()
 	_doubleNum = static_cast<double>(_floatNum);
 	if (std::isprint(_character) == 0)
 		_characterFlg = NONDISPLAYABLE;
+	if (!(_floatNum >= std::numeric_limits<char>::min() && _floatNum <= std::numeric_limits<char>::max()))
+		_characterFlg = OVERFLOWCHAR;
+	if (!(_floatNum >= std::numeric_limits<int>::min() && _floatNum <= std::numeric_limits<int>::max()))
+	{
+		_overflow = INFINITYFLOAT;
+		if (_floatNum < std::numeric_limits<int>::min())
+			_infinitySign = -1;
+		else
+			_infinitySign = 1;
+	}
 }
 
 void ScalarConverter::doubleConvertToOther()
@@ -95,161 +188,154 @@ void ScalarConverter::doubleConvertToOther()
 	_floatNum = static_cast<float>(_doubleNum);
 	if (std::isprint(_character) == 0)
 		_characterFlg = NONDISPLAYABLE;
+	if (!(_doubleNum >= std::numeric_limits<char>::min() && _doubleNum <= std::numeric_limits<char>::max()))
+		_characterFlg = OVERFLOWCHAR;
+	if (!(_doubleNum >= std::numeric_limits<int>::min() && _doubleNum <= std::numeric_limits<int>::max()))
+	{
+		_overflow = INFINITYDOUBLE;
+		if (_doubleNum < std::numeric_limits<int>::min())
+			_infinitySign = -1;
+		else
+			_infinitySign = 1;
+	}
 }
 
-bool ScalarConverter::typeChk(std::string value)
+bool ScalarConverter::errorPrint(std::string str)
 {
-	int	length = value.length();
-	if (length == 1 && !(value.at(0) >= '0' && value.at(0) <= '9'))
-	{
-		if (std::isprint(value.at(0)) == 0)
-			return (false);
-		_valueType = CHAR;
-		_character = *(value.c_str());
-		return (true);
-	}
-	if (myStrIsspace(value) == false)
-		return (false);
-	char *offset = NULL;
-	double num = std::strtod(value.c_str(), &offset);
-	std::string cppOffset = offset;
-	if (!(cppOffset.length() == 0 || (cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0)))
-		return (false);
-	if ((cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0))
-	{
-		if (!(num == num))
-		{
-			_valueType = NANFLAOT;
-			_floatNum = num;
-			_doubleNum = num;
-			return (true);
-		}
-		if (num == INFINITY || num == -INFINITY)
-		{
-			_valueType = INFINITYFLOAT;
-			_floatNum = num;
-			_doubleNum = num;
-			if (num == INFINITY)
-				_infinitySign = 1;
-			else
-				_infinitySign = -1;
-			return (true);
-		}
-		_valueType = FLOAT;
-		_floatNum = static_cast<float>(num);
-		return (true);
-	}
-	if (!(num == num))
-	{
-		_valueType = NANDOUBLE;
-		_floatNum = num;
-		_doubleNum = num;
-		return (true);
-	}
-	if (num == INFINITY || num == -INFINITY)
-	{
-		_valueType = INFINITYDOUBLE;
-		_floatNum = num;
-		_doubleNum = num;
-		if (num == INFINITY)
-			_infinitySign = 1;
-		else
-			_infinitySign = -1;
-		return (true);
-	}
-	if (value.find('.') != std::string::npos)
-	{
-		_valueType = DOUBLE;
-		_doubleNum = num;
-		return (true);
-	}
+	std::cout << str << std::endl;
+	return (false);
+}
+
+void ScalarConverter::typeSetChar()
+{
+	_valueType = CHAR;
+	_character = *(_value.c_str());
+}
+
+void ScalarConverter::typeSetInt(double num)
+{
 	_valueType = INT;
 	_integerNum = static_cast<int>(num);
 	if (!(num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max()))
 		_overflow = OVERFLOWINT;
+}
+
+void ScalarConverter::typeSetFloat(double num)
+{
+	if (!(num == num))
+	{
+		_valueType = NANFLAOT;
+		_floatNum = static_cast<float>(num);
+		_doubleNum = static_cast<double>(num);
+		return ;
+	}
+	if (num == INFINITY || num == -INFINITY)
+	{
+		_valueType = INFINITYFLOAT;
+		_floatNum = static_cast<float>(num);
+		_doubleNum = static_cast<double>(num);
+		if (num == INFINITY)
+			_infinitySign = 1;
+		else
+			_infinitySign = -1;
+		return ;
+	}
+	_valueType = FLOAT;
+	_floatNum = static_cast<float>(num);
+}
+
+void ScalarConverter::typeSetDouble(double num)
+{
+	if (!(num == num))
+	{
+		_valueType = NANDOUBLE;
+		_floatNum = static_cast<float>(num);
+		_doubleNum = static_cast<double>(num);
+		return ;
+	}
+	if (num == INFINITY || num == -INFINITY)
+	{
+		_valueType = INFINITYDOUBLE;
+		_floatNum = static_cast<float>(num);
+		_doubleNum = static_cast<double>(num);
+		if (num == INFINITY)
+			_infinitySign = 1;
+		else
+			_infinitySign = -1;
+		return ;
+	}
+	if (_value.find('.') != std::string::npos)
+	{
+		_valueType = DOUBLE;
+		_doubleNum = static_cast<double>(num);;
+		return ;
+	}
+}
+
+bool ScalarConverter::myStrIsspace(std::string str)
+{
+	int length = static_cast<int>(str.length());
+
+	for (int i = 0; i < length; i++)
+	{
+		if (std::isspace(str.at(i)) != 0)
+			return (false);	
+	}
+	return (true);
+}
+
+bool ScalarConverter::typeChk()
+{
+	int	length = static_cast<int>(_value.length());
+	if (length == 1 && !(_value.at(0) >= '0' && _value.at(0) <= '9'))
+	{
+		if (std::isprint(_value.at(0)) == 0)
+			return (false);
+		typeSetChar();
+		return (true);
+	}
+	if (myStrIsspace(_value) == false)
+		return (false);
+	char *offset = NULL;
+	double num = std::strtod(_value.c_str(), &offset);
+	std::string cppOffset = offset;
+	if (!(cppOffset.length() == 0 || (cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0)))
+		return (false);
+	if ((cppOffset.length() > 0 && std::strncmp(offset, "f\0", 2) == 0))
+		typeSetFloat(num);
+	else if (!(num == num) || num == INFINITY || num == -INFINITY || _value.find('.') != std::string::npos)
+		typeSetDouble(num);
+	else
+		typeSetInt(num);
 	return (true);
 }
 
 void ScalarConverter::printAllValue(std::string value)
 {
-	if (typeChk(value) == false)
+	_value = value;
+	if (typeChk() == false)
 	{
-		std::cout << "argv Error" << std::endl;
+		errorPrint("argv error");
 		return ;
 	}
 	switch (_valueType)
 	{
 		case CHAR :
-			std::cout << "type : " << "char" << std::endl << std::endl;
 			charConvertToOther();
 			break ;
 		case INT :
-			std::cout << "type : " << "int" << std::endl << std::endl;
 			intConvertToOther();
 			break ;
 		case FLOAT :
-			std::cout << "type : " << "float" << std::endl << std::endl;
 			floatConvertToOther();
 			break ;
 		case DOUBLE :
-			std::cout << "type : " << "double" << std::endl << std::endl;
 			doubleConvertToOther();
 			break ;
-		case NANDOUBLE :
-			std::cout << "type : " << "nan" << std::endl << std::endl;
-			break ;
-		case NANFLAOT :
-			std::cout << "type : " << "nanf" << std::endl << std::endl;
-			break ;
-		case INFINITYFLOAT :
-			std::cout << "type : " << "inff" << std::endl << std::endl;
-			break ;
-		case INFINITYDOUBLE :
-			std::cout << "type : " << "inf" << std::endl << std::endl;
-			break ;
 	}
-	if (_valueType == NANDOUBLE || _valueType == NANFLAOT)
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "nanf" << std::endl;
-		std::cout << "double: " << "nan" << std::endl;
-		return ;
-	}
-	if (_valueType == INFINITYFLOAT || _valueType == INFINITYDOUBLE)
-	{
-		std::string signstr;
-		if (_infinitySign == -1)
-			signstr = "-";
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << signstr << "inff" << std::endl;
-		std::cout << "double: " << signstr << "inf" << std::endl;
-		return ;
-	}
-	if (_overflow == OVERFLOWINT)
-	{
-		std::cout << "char: " << "impossible" << std::endl;
-		std::cout << "int: " << "impossible" << std::endl;
-		std::cout << "float: " << "impossible" << std::endl;
-		std::cout << "double: " << "impossible" << std::endl;
-		return ;
-	}
-	if ( _characterFlg == NONDISPLAYABLE)
-		std::cout << "char: " << "Non displayable" << std::endl;
-	else
-		std::cout << "char: '" << getChar() << "'" << std::endl;
-	std::cout << "int: " << getInt() << std::endl;
-
-	size_t printCnt;
-	size_t dotPoint = value.find('.');
-	size_t isfloat = 0;
-	if (value.find('f') != std::string::npos)
-		isfloat = 1;
-	if (dotPoint == std::string::npos || value.length() - isfloat - dotPoint == 1)
-		printCnt = 1;
-	else
-		printCnt = value.length() - isfloat - dotPoint - 1;
-	std::cout << "float: " << std::fixed << std::setprecision(printCnt) <<  getFloat() << "f" << std::endl;
-	std::cout << "double: " << getDouble() << std::endl;
+	testPrintType();
+	printChar();
+	printInt();
+	printFloat();
+	printDouble();
 }

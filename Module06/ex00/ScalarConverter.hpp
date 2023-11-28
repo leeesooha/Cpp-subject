@@ -29,12 +29,22 @@ class ScalarConverter
         static float getFloat();
         static double getDouble();
         static void printAllValue(std::string value);
-        static bool typeChk(std::string value);
+        static bool typeChk();
         static bool myStrIsspace(std::string str);
         static void charConvertToOther();
         static void intConvertToOther();
         static void floatConvertToOther();
         static void doubleConvertToOther();
+        static void printChar();
+        static void printInt();
+        static void printFloat();
+        static void printDouble();
+        static void testPrintType();
+        static void typeSetChar();
+        static void typeSetInt(double num);
+        static void typeSetFloat(double num);
+        static void typeSetDouble(double num);
+        static bool errorPrint(std::string str);
     private :
         ScalarConverter();
         ScalarConverter(const ScalarConverter &other);
@@ -48,6 +58,7 @@ class ScalarConverter
         static int _infinitySign;
         static int _overflow;
         static int _characterFlg;
+        static std::string _value;
 };
 
 #endif
