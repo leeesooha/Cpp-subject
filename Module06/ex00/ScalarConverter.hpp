@@ -5,6 +5,9 @@
 #include <iostream>
 #include <limits>
 #include <iomanip>
+#include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 enum type {
     NONE = 0,

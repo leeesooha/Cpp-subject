@@ -16,8 +16,7 @@ ScalarConverter::ScalarConverter()
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
 {
-	if (this != &other)
-		;
+	(void)other;
 	return (*this);
 }
 
