@@ -42,19 +42,18 @@ void identify(Base& p)
         std::cout << "A class type" << std::endl;
     }
     catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    } try {
+    }
+    try {
         temp = dynamic_cast<B&>(p);
         std::cout << "B class type" << std::endl;
     }
     catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
-    } try {
+    }
+    try {
         temp = dynamic_cast<C&>(p);
         std::cout << "C class type" << std::endl;
     }
     catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
     }
 }
 

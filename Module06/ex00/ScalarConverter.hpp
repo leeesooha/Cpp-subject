@@ -24,11 +24,16 @@ enum type {
 class ScalarConverter
 {
     public :
+        static void convert(std::string value);
+    private :
+        ScalarConverter();
+        ScalarConverter(const ScalarConverter &other);
+        ScalarConverter& operator=(const ScalarConverter& other);
+        ~ScalarConverter();
         static char getChar();
         static int getInt();
         static float getFloat();
         static double getDouble();
-        static void printAllValue(std::string value);
         static bool typeChk();
         static bool myStrIsspace(std::string str);
         static void charConvertToOther();
@@ -45,11 +50,6 @@ class ScalarConverter
         static void typeSetFloat(double num);
         static void typeSetDouble(double num);
         static bool errorPrint(std::string str);
-    private :
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter &other);
-        ScalarConverter& operator=(const ScalarConverter& other);
-        virtual ~ScalarConverter();
         static char _character;
         static int _integerNum;
         static float _floatNum;

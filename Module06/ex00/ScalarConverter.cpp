@@ -310,7 +310,7 @@ bool ScalarConverter::typeChk()
 	return (true);
 }
 
-void ScalarConverter::printAllValue(std::string value)
+void ScalarConverter::convert(std::string value)
 {
 	_value = value;
 	if (typeChk() == false)
@@ -333,7 +333,6 @@ void ScalarConverter::printAllValue(std::string value)
 			doubleConvertToOther();
 			break ;
 	}
-	// testPrintType();
 	printChar();
 	printInt();
 	printFloat();

@@ -7,6 +7,6 @@ int main(int argc, char **argv)
         std::cout << "argv Error" << std::endl;
         return (0);
     }
-    ScalarConverter::printAllValue(argv[1]);
+    ScalarConverter::convert(argv[1]);
     return (0);
 }
