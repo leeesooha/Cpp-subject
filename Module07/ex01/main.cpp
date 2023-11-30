@@ -1,19 +1,18 @@
 #include "iter.hpp"
+#include "print.hpp"
 #include <iostream>
-
-void increment(int *num)
-{
-    *num += 3;
-}
 
 int main(void)
 {
-    int array[10];
-
+    int intArray[10];
     for (size_t i = 0; i < 10; i++)
-        array[i] = 0;
-    std::cout << array << std::endl;
-    
-    ::iter(array, 10, increment);
-    return 0;
+        intArray[i] = i;
+    int *ptr = intArray;
+    ::iter<int>(ptr, 10, print);
+
+    char charArray[10];
+    for (size_t i = 0; i < 10; i++)
+        charArray[i] = 'a' + i;
+    ::iter<char>(charArray, 10, print);
+    return (0);
 }
