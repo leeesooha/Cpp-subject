@@ -4,11 +4,20 @@
 #include <cstring>
 
 template <typename T>
-void Array(T *arrayPtr, size_t size, void (*f)(T&))
+class Array
 {
-    for (size_t i = 0; i < size; i++)
-        f(arrayPtr[i]);
-}
+    public :
+        Array();
+        Array(unsigned int n);
+        Array(const Array &other);
+        Array& operator=(const Array<T> &other);
+        ~Array();
+        T& operator[](const long &idex);
+        size_t getArraySize() const;
+    private :
+        T *_arrayPtr;
+        size_t _arraySize;
+};
 
-# include "Array.tpp"
+#include "Array.tpp"
 #endif
