@@ -2,17 +2,18 @@
 #define EASYFIND_HPP
 
 #include <algorithm>
+#include <iterator>
 
 template <typename T>
-T& easyfind(T &container, int target) const
+typename T::iterator easyfind(T &container, int target)
 {
-	T* ptr;
+	typename T::iterator accessContainer;
 
-	ptr = std::find(container.begein(), container.last(), target);
-	if (ptr == container.last())
+	accessContainer = std::find(container.begin(), container.end(), target);
+	if (accessContainer == container.end())
 		throw std::out_of_range("not found value!");
 	else
-		return (ptr);
+		return (accessContainer);
 }
 
 #endif
