@@ -1,16 +1,9 @@
 #include <iostream>
 #include <Array.hpp>
-#include <cstdlib>
-
-void leak_check(void)
-{
-    system("leaks a.out");
-}
 
 #define MAX_VAL 750
 int main(int, char**)
 {
-    atexit(leak_check);
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
