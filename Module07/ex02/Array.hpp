@@ -12,6 +12,7 @@ class Array
         Array(const Array &other);
         Array& operator=(const Array<T> &other);
         ~Array();
+        const T& operator[](const long &idex) const;
         T& operator[](const long &idex);
         size_t getArraySize() const;
     private :
