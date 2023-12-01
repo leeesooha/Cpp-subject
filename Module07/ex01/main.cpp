@@ -7,8 +7,7 @@ int main(void)
     int intArray[10];
     for (size_t i = 0; i < 10; i++)
         intArray[i] = i;
-    int *ptr = intArray;
-    ::iter<int>(ptr, 10, print);
+    ::iter<int>(intArray, 10, print);
 
     char charArray[10];
     for (size_t i = 0; i < 10; i++)

@@ -10,7 +10,7 @@ void leak_check(void)
 #define MAX_VAL 750
 int main(int, char**)
 {
-    // atexit(leak_check);
+    atexit(leak_check);
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
@@ -106,6 +106,9 @@ int main(int, char**)
     {
         characters[i] = rand();
     }
+    for (int i = 0; i < num; i++)
+        std::cout << characters[i];
+    std::cout << std::endl;
     delete [] mirror_2;//
     return 0;
 }
