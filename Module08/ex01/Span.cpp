@@ -83,7 +83,6 @@ unsigned int Span::longestSpan() const
 
 void Span::addNumbers(const std::vector<int> newVector)
 {
-
     if (this->_vector.size() + newVector.size() <= this->_max)
     {
         std::vector<int>::iterator iterEnd = this->_vector.end();
