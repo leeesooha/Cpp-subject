@@ -60,12 +60,12 @@ unsigned int Span::shortestSpan() const
     tempVector = this->_vector;
     std::sort(tempVector.begin(), tempVector.end());
     std::vector<int>::iterator tempIterator = tempVector.begin();
-    unsigned int num = INT_MAX;
+    unsigned int num = UINT_MAX;
 
     while (tempIterator != tempVector.end() - 1)
     {
-        if (num > static_cast<unsigned int>(abs(*tempIterator - *(tempIterator + 1))))
-            num = static_cast<unsigned int>(abs(*tempIterator - *(tempIterator + 1)));
+        if (num > static_cast<unsigned int>(std::abs(static_cast<long long>(*tempIterator) - static_cast<long long>(*(tempIterator + 1)))))
+            num = static_cast<unsigned int>(std::abs(static_cast<long long>(*tempIterator) - static_cast<long long>(*(tempIterator + 1))));
         tempIterator++;
     }
     return (num);
@@ -78,7 +78,7 @@ unsigned int Span::longestSpan() const
 
     tempVector = this->_vector;
     std::sort(tempVector.begin(), tempVector.end());
-    return (static_cast<unsigned int>(std::abs(*(tempVector.end() - 1) - *tempVector.begin())));
+    return (static_cast<unsigned int>(std::abs(static_cast<long long>(*(tempVector.end() - 1)) - static_cast<long long>(*tempVector.begin()))));
 }
 
 void Span::addNumbers(const std::vector<int> newVector)
@@ -90,4 +90,9 @@ void Span::addNumbers(const std::vector<int> newVector)
     }
     else
         throw Span::FullError();
+}
+
+size_t Span::size()
+{
+    return (this->_vector.size());
 }

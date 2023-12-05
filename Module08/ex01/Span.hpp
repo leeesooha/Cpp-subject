@@ -18,6 +18,7 @@ class Span
 		unsigned int shortestSpan() const;
 		unsigned int longestSpan() const;
         void addNumbers(std::vector<int> newVector);
+        size_t size();
 		class FullError : public std::exception
         {
             public :
