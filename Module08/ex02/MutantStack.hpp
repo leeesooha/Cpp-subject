@@ -3,7 +3,6 @@
 
 #include <stack>
 
-
 template <typename T>
 class MutantStack : public std::stack<T>
 {
@@ -16,13 +15,22 @@ class MutantStack : public std::stack<T>
         typedef typename MutantStack<T>::stack::container_type::iterator iterator;
         iterator begin();
         iterator end();
-        //rbegin
-        //rend
+        typedef typename MutantStack<T>::stack::container_type::const_iterator ConstIterator;
+        ConstIterator begin() const;
+        ConstIterator end() const;
 
-        //cbegin
-        //cend
-        //crbegin
-        //crend
+        typedef typename MutantStack<T>::stack::container_type::reverse_iterator ReverseIterator;
+        ReverseIterator rbegin();
+        ReverseIterator rend();
+        typedef typename MutantStack<T>::stack::container_type::const_reverse_iterator ConstReverseIterator;
+        ConstReverseIterator rbegin() const;
+        ConstReverseIterator rend() const;
+
+        ConstIterator cbegin() const;
+        ConstIterator cend() const;
+    
+        ConstReverseIterator crbegin() const;
+        ConstReverseIterator crend() const;
 };
 
 #include "MutantStack.tpp"
