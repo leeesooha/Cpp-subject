@@ -6,6 +6,7 @@
 #include <iterator>
 #include <vector>
 #include <cmath>
+#include <climits>
 
 class Span
 {

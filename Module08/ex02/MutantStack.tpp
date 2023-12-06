@@ -7,7 +7,7 @@ MutantStack<T>::MutantStack()
 }
 
 template <typename T>
-MutantStack<T>::MutantStack(const MutantStack &other)
+MutantStack<T>::MutantStack(const MutantStack &other) : std::stack<T>(other)
 {
     *this = other;
 }
