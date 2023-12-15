@@ -10,5 +10,6 @@ int main(int argc, char **argv)
     }
     BitcoinExchange exchange;
     exchange.exchangeCoin(argv[1]);
+    // exchange.printExchangeRateBoard();
     return (0);
 }
