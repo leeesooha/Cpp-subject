@@ -236,7 +236,7 @@ bool BitcoinExchange::lineFormatCheck(std::string line)
 
 void BitcoinExchange::exchangeCoin(std::string filename)
 {
-	std::fstream inputFile(filename);
+	std::ifstream inputFile(filename.c_str());
 	std::string line;
 
 	if (inputFile.is_open() == false)
