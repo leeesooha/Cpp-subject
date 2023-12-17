@@ -23,9 +23,11 @@ class BitcoinExchange
         bool lineFormatCheck(std::string line);
         void stringStreamChange(std::istringstream &stream, std::string str);
         int _status;
-        bool error_print(std::string message);
+        bool error_print(std::string message, bool returnValue);
+        void error_print(std::string message);
         bool stringStreamEmptyCheck(std::istringstream &stream);
-        bool isStrNumber(std::string str);
+        bool isStrSingNumber(std::string str);
+        bool StrNumberSize(std::string str, size_t size);
         bool dateCheck(double year, double month, double day);
     public :
         BitcoinExchange();
