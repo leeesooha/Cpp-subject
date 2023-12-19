@@ -21,6 +21,11 @@ PmergeMe::~PmergeMe()
 {
 }
 
+void PmergeMe::initJacobsthalNumber(int num)
+{
+	
+}
+
 void PmergeMe::printResult()
 {
 	std::cout << "Before: ";
@@ -112,6 +117,7 @@ void PmergeMe::run(char **argv)
 	this->_DequeTime = 0;
 	if (charPtrToInt(argv) == false)
 		return (errorPrint("Error"));
+	initJacobsthalNumber(this->_elementCount);
 	sortVector();
 	sortDeque();
 	printResult();

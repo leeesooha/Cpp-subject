@@ -13,6 +13,7 @@ class PmergeMe
         double _VectorTime;
         double _DequeTime;
         int _elementCount;
+        std::vector<int> _jacobsthalNumber;
         std::vector<int> _myVector;
         std::vector<int> _sortedMyVector;
         std::deque<int> _myDeque;
@@ -25,6 +26,7 @@ class PmergeMe
         void printResult();
         void sortVector();
         void sortDeque();
+        void initJacobsthalNumber(int num);
     public :
         PmergeMe();
         PmergeMe(const PmergeMe &other);
