@@ -27,6 +27,7 @@ class PmergeMe
         void sortVector();
         void sortDeque();
         void initJacobsthalNumber(int num);
+        void mergeInsertSort(int totalPairCnt, int depth, int onePairSize);
     public :
         PmergeMe();
         PmergeMe(const PmergeMe &other);
