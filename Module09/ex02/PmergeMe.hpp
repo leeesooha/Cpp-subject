@@ -27,6 +27,7 @@ class PmergeMe
         void sortVector();
         void sortDeque();
         void initJacobsthalNumber(int num);
+        void binarySort(int pending);
         void mergeInsertSort(int totalPairCnt, int depth, int onePairSize);
     public :
         PmergeMe();
@@ -37,3 +38,9 @@ class PmergeMe
 };
 
 #endif
+
+
+		// a = this->_myVector[i * onePairSize];
+		// b = this->_myVector[i * onePairSize + (onePairSize / 2)];
+		// if (a < b)
+		// 	std::swap(this->_myVector[i * onePairSize], this->_myVector[i * onePairSize + (onePairSize / 2)]);

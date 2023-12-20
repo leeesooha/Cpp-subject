@@ -42,6 +42,11 @@ void PmergeMe::printResult()
 	<< " us" << std::endl;
 }
 
+// void PmergeMe::binarySort(int pending)
+// {
+// 	return ;
+// }
+
 void PmergeMe::mergeInsertSort(int totalPairCnt, int depth, int onePairSize)
 {
 	if (totalPairCnt == 1)
@@ -52,8 +57,9 @@ void PmergeMe::mergeInsertSort(int totalPairCnt, int depth, int onePairSize)
 			std::swap(this->_myVector[i * onePairSize], this->_myVector[i * onePairSize + (onePairSize / 2)]);
 		std::cout << "[" << this->_myVector[i * onePairSize] << "," << this->_myVector[i * onePairSize + (onePairSize / 2)] << "]" << std::endl;
 	}
-	std::cout << std::endl;
+	std::cout << "" << std::endl;
 	mergeInsertSort(totalPairCnt / 2, depth + 1, onePairSize * 2);
+	// binarySort(b3);
 }
 
 void PmergeMe::sortVector()
