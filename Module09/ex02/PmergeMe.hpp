@@ -6,6 +6,8 @@
 #include <vector>
 #include <deque>
 #include <sstream>
+#include <ctime>
+#include <iomanip>
 
 class PmergeMe
 {
@@ -15,7 +17,7 @@ class PmergeMe
         int _elementCount;
         std::vector<int> _jacobsthalNumber;
         std::vector<int> _myVector;
-        std::vector<int> _sortedMyVector;
+        std::vector<int> _mainChainVector;
         std::deque<int> _myDeque;
         std::vector<int> _sortedMyDeque;
         bool charPtrToInt(char **argv);
@@ -27,8 +29,9 @@ class PmergeMe
         void sortVector();
         void sortDeque();
         void initJacobsthalNumber(int num);
-        void binarySort(int pending);
-        void mergeInsertSort(int totalPairCnt, int depth, int onePairSize);
+        void binarySort(int start, int end, int insertContent, int onePairSize, int elementCount, std::vector<int> &pendingChainVector);
+        void mergeInsertSort(int elementCount, int depth, int onePairSize);
+        void decouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int depth, int onePairSize);
     public :
         PmergeMe();
         PmergeMe(const PmergeMe &other);
