@@ -17,6 +17,7 @@ class PmergeMe
         int _elementCount;
         std::vector<int> _jacobsthalNumber;
         std::vector<int> _myVector;
+        std::vector<int> _beforeMyVector;
         std::vector<int> _mainChainVector;
         std::deque<int> _myDeque;
         std::vector<int> _sortedMyDeque;
@@ -25,13 +26,15 @@ class PmergeMe
         void printVector(std::vector<int> vectorVar);
         void printDeque(std::deque<int> DequeVar);
         void errorPrint(std::string message);
+        void swapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
         void printResult();
         void sortVector();
         void sortDeque();
+        void jacobMerge(std::vector<int> &pendingChainVector, int onePairSize);
         void initJacobsthalNumber(int num);
-        void binarySort(int start, int end, int insertContent, int onePairSize, int elementCount, std::vector<int> &pendingChainVector);
-        void mergeInsertSort(int elementCount, int depth, int onePairSize);
-        void decouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int depth, int onePairSize);
+        void binarySort(int start, int end, int pendPos, int onePairSize, std::vector<int> &pendingChainVector);
+        void mergeInsertSort(int elementCount, int onePairSize);
+        void decouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int onePairSize);
     public :
         PmergeMe();
         PmergeMe(const PmergeMe &other);

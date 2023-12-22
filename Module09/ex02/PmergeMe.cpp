@@ -58,140 +58,155 @@ PmergeMe::~PmergeMe()
 	
 // }
 
-void PmergeMe::binarySort(int start, int end, int pendingPosition, int onePairSize, int elementCount, std::vector<int> &pendingChainVector)
+void PmergeMe::binarySort(int start, int end, int pendPos, int onePairSize, std::vector<int> &pendingChainVector)
 {
+	int mainNpendingDiff = onePairSize / 2;
+	int right = 1;
+	std::vector<int>::iterator insertPos_it;
+	std::vector<int>::iterator pendStart_it;
+	std::vector<int>::iterator pendEnd_it;
+	int start_adj = start * mainNpendingDiff;
+	int end_adj = end * mainNpendingDiff;
+	int pendPos_adj = pendPos * mainNpendingDiff;
+
 	if (start >= end)
 	{
-		if (pendingChainVector[pendingPosition * (onePairSize / 2)] < this->_mainChainVector[start * (onePairSize / 2)])
-		{
-			std::vector<int>::iterator it = this->_mainChainVector.begin() + (start * (onePairSize / 2));
-			std::vector<int>::iterator pendingIdexStart = pendingChainVector.begin() + pendingPosition * (onePairSize / 2);
-			std::vector<int>::iterator pendingIdexEnd = pendingChainVector.begin() + (pendingPosition * (onePairSize / 2) + ((onePairSize / 2)));
-			this->_mainChainVector.insert(it, pendingIdexStart, pendingIdexEnd);
-		}
+		pendStart_it = pendingChainVector.begin() + pendPos_adj;
+		pendEnd_it = pendingChainVector.begin() + (pendPos_adj + (mainNpendingDiff));
+		if (pendingChainVector[pendPos_adj] < _mainChainVector[start_adj])
+			insertPos_it = _mainChainVector.begin() + start_adj;
 		else
-		{
-			std::vector<int>::iterator it = this->_mainChainVector.begin() + ((start + 1) * (onePairSize / 2));
-			std::vector<int>::iterator pendingIdexStart = pendingChainVector.begin() + pendingPosition * (onePairSize / 2);
-			std::vector<int>::iterator pendingIdexEnd = pendingChainVector.begin() + (pendingPosition * (onePairSize / 2) + ((onePairSize / 2)));
-			this->_mainChainVector.insert(it, pendingIdexStart, pendingIdexEnd);
-		}
+			insertPos_it = _mainChainVector.begin() + ((start + right) * mainNpendingDiff);
+		_mainChainVector.insert(insertPos_it, pendStart_it, pendEnd_it);
 		return ;
 	}
 	// std::cout << "here" << std::endl;
-	if (this->_mainChainVector[(start * (onePairSize / 2)) + (((end * (onePairSize / 2)) - (start * (onePairSize / 2))) / 2)] \
-		< pendingChainVector[pendingPosition * (onePairSize / 2)])
-		binarySort((start + ((end - start) / 2)) + 1, end, pendingPosition, onePairSize, elementCount, pendingChainVector);
+	std::cout << "start: " << start << " end: " << end << std::endl;
+	std::cout << "start_adj: " << start_adj << " end_adj: " << end_adj << std::endl;
+	std::cout << "mid_value: " << _mainChainVector[start + ((end - start) / 2)] << " mididx: " << start + ((end - start) / 2) << std::endl;
+	if (_mainChainVector[start_adj + ((end_adj - start_adj) / 2)] < pendingChainVector[pendPos_adj])
+		binarySort((start + ((end - start) / 2)) + 1, end, pendPos, onePairSize, pendingChainVector);
 	else
-		binarySort(start, (start + ((end - start) / 2)) - 1, pendingPosition, onePairSize, elementCount, pendingChainVector);
+		binarySort(start, (start + ((end - start) / 2)) - 1, pendPos, onePairSize, pendingChainVector);
 }
 
-void PmergeMe::decouplePendingChain(std::vector<int> &pendingChainVector, int elementCount, int depth, int onePairSize)
+void PmergeMe::jacobMerge(std::vector<int> &pendingChainVector, int onePairSize)
+{
+	int mainNpendingDiff = onePairSize / 2;
+	int jacobIdex = 1;
+	int insertedCnt = 0;
+	int previous = -1;
+	int pendingChainSize = static_cast<int>(pendingChainVector.size()) / mainNpendingDiff;
+
+	// std::cout << "before fore line" << std::endl;
+	for (int pendIdx = 0; pendIdx < pendingChainSize; pendIdx++)
+	{
+		pendIdx = _jacobsthalNumber[jacobIdex] + previous;
+		if (pendIdx + 1 > pendingChainSize)
+		{
+			pendIdx = pendingChainVector.size() / mainNpendingDiff - 1;
+			// std::cout << "last: " << pendIdx << std::endl;
+		}
+		while(_jacobsthalNumber[jacobIdex + previous] < pendIdx + 1)
+		{
+			std::cout << "sort start" << std::endl;
+			if (pendIdx == 0)
+				binarySort(0, pendIdx + insertedCnt, pendIdx, onePairSize, pendingChainVector);
+			else
+				binarySort(0, pendIdx + insertedCnt - 1, pendIdx, onePairSize, pendingChainVector);
+			insertedCnt++;
+			std::cout << "sort result: " << "pending_idx " << pendIdx << std::endl;
+			for (int i = 0; i < static_cast<int>(_mainChainVector.size()); i++)
+				std::cout << _mainChainVector[i] << " ";
+			std::cout << std::endl << std::endl;
+			pendIdx--;
+		}
+		pendIdx = _jacobsthalNumber[jacobIdex] + previous;
+		jacobIdex++;
+	}
+	// std::cout << std::endl << std::endl;
+}
+
+void PmergeMe::decouplePendingChain(std::vector<int> &pendingChainVector, int elementCount, int onePairSize)
 {
 	//a = this->_mainChainVector[i * onePairSize]
 	//b = this->_mainChainVector[i * onePairSize + (onePairSize / 2)]
 	std::vector<int> mainchain;
-
-	(void)depth;
+	int pairIndex = 0;
+	int mainNpendingDiff = onePairSize / 2;
+	int totalPairCnt = elementCount / 2;
 	int i = 0;
 
-	while (i < elementCount / 2)
+	while (i < totalPairCnt)
 	{
-		for (int leftPair = 0; leftPair < onePairSize / 2; leftPair++)
-			mainchain.push_back(this->_mainChainVector[i * onePairSize + leftPair]);
-		for (int leftPair = 0; leftPair < onePairSize / 2; leftPair++)
-			pendingChainVector.push_back(this->_mainChainVector[i * onePairSize + (onePairSize / 2) + leftPair]);
+		pairIndex = i * onePairSize;
+		for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
+			mainchain.push_back(_mainChainVector[pairIndex + leftPair]);
+		for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
+			pendingChainVector.push_back(_mainChainVector[pairIndex + mainNpendingDiff + leftPair]);
 		i++;
 	}
+	pairIndex = i * onePairSize;
 	if (elementCount % 2 == 1)
-		for (int leftPair = 0; leftPair < onePairSize / 2; leftPair++)
-			pendingChainVector.push_back(this->_mainChainVector[i * onePairSize + leftPair]);
-	this->_mainChainVector = mainchain;
+		for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
+			pendingChainVector.push_back(_mainChainVector[pairIndex + leftPair]);
+	_mainChainVector = mainchain;
 }
 
-void PmergeMe::mergeInsertSort(int elementCount, int depth, int onePairSize)
+void PmergeMe::swapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff)
 {
-	if (elementCount == 1)
-	{
-		this->_mainChainVector = this->_myVector;
-		return ;
-	}
-	int totalPairCnt = elementCount / 2;
+	int pairIndex = 0;
+
+	std::cout << "swap" << std::endl;
 	for (int i = 0; i < totalPairCnt; i++)
 	{
-		if (this->_myVector[i * onePairSize] < this->_myVector[i * onePairSize + (onePairSize / 2)])
+		pairIndex = i * onePairSize;
+		if (_myVector[pairIndex] < _myVector[pairIndex + mainNpendingDiff])
 		{
-			for (int leftPair = 0; leftPair < onePairSize / 2; leftPair++)
-				std::swap(this->_myVector[i * onePairSize + leftPair], this->_myVector[i * onePairSize + (onePairSize / 2) + leftPair]);
+			for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
+				std::swap(_myVector[pairIndex + leftPair], _myVector[pairIndex + mainNpendingDiff + leftPair]);
 		}
-		// std::cout << "[" << this->_myVector[i * onePairSize] << "," << this->_myVector[i * onePairSize + (onePairSize / 2)] << "]" << std::endl;
+		std::cout << "[" << this->_myVector[pairIndex] << "," << this->_myVector[pairIndex + mainNpendingDiff] << "]" << std::endl;
 	}
-	// std::cout << std::endl << std::endl;
-	mergeInsertSort(elementCount / 2, depth + 1, onePairSize * 2);
+}
+
+void PmergeMe::mergeInsertSort(int elementCount, int onePairSize)
+{
+	int mainNpendingDiff = onePairSize / 2;
+	int totalPairCnt = elementCount / 2;
 	std::vector<int> pendingChainVector;
-	decouplePendingChain(pendingChainVector, elementCount, depth, onePairSize);
 
-	// std::cout << "mainChain : " << std::endl;
-	// for (size_t i = 0; i < this->_mainChainVector.size(); i++)
-	// 	std::cout << this->_mainChainVector[i] << " ";
-	// std::cout << std::endl;
-	// std::cout << "pendingChain : " << std::endl;
-	// for (size_t i = 0; i < pendingChainVector.size(); i++)
-	// 	std::cout << pendingChainVector[i] << " ";
-	// std::cout << std::endl << std::endl;
-
-	int jacobIdex = 1;
-	size_t insertedCnt = 0;
-
-	if (pendingChainVector.size() / (onePairSize / 2) == 1)
+	if (elementCount == 1)
 	{
-		binarySort(0, 0, 0, onePairSize, elementCount, pendingChainVector);
-		insertedCnt++;
-		// std::cout << std::endl << "0 sort -------------: " << std::endl;
-		// for (size_t i = 0; i < this->_mainChainVector.size(); i++)
-		// 	std::cout << this->_mainChainVector[i] << " ";
-		// std::cout << std::endl << std::endl;
+		_mainChainVector = _myVector;
 		return ;
 	}
-	// std::cout << "before fore line" << std::endl;
-	for (int i = 0; i < static_cast<int>(pendingChainVector.size()) / (onePairSize / 2); i++)
-	{
-		// std::cout << "for inner" << std::endl;
-		if (i < this->_jacobsthalNumber[jacobIdex])
-		{
-			i = this->_jacobsthalNumber[jacobIdex] - 1;
-			if (i + 1 > static_cast<int>(pendingChainVector.size()) / (onePairSize / 2))
-			{
-				i = pendingChainVector.size() / (onePairSize / 2) - 1;
-				// std::cout << "last: " << i << std::endl;
-			}
-			while(this->_jacobsthalNumber[jacobIdex - 1] < i + 1)
-			{
-				// std::cout << "while inner" << std::endl;
-				if (i == 0)
-					binarySort(0, i + insertedCnt, i, onePairSize, elementCount, pendingChainVector);
-				else
-					binarySort(0, i + insertedCnt - 1, i, onePairSize, elementCount, pendingChainVector);
-				insertedCnt++;
-				// std::cout << std::endl << i << " sort -------------: " << std::endl;
-				// for (size_t i = 0; i < this->_mainChainVector.size(); i++)
-				// 	std::cout << this->_mainChainVector[i] << " ";
-				// std::cout << std::endl << std::endl;
-				i--;
-			}
-			i = this->_jacobsthalNumber[jacobIdex] - 1;
-		}
-		jacobIdex++;
-	}
-	// std::cout << std::endl << std::endl;
+	swapPairs(totalPairCnt, onePairSize, mainNpendingDiff);
+	mergeInsertSort(elementCount / 2, onePairSize * 2);
+	decouplePendingChain(pendingChainVector, elementCount, onePairSize);
+
+	std::cout << "----------------------------------------------------" << std::endl;
+	std::cout << "mainChain: " << onePairSize / 2 << " set" << ", depth " << onePairSize / 2 << std::endl;
+	for (size_t i = 0; i < this->_mainChainVector.size(); i++)
+		std::cout << this->_mainChainVector[i] << " ";
+	std::cout << std::endl;
+	std::cout << "pendingChain" << std::endl;
+	for (size_t i = 0; i < pendingChainVector.size(); i++)
+		std::cout << pendingChainVector[i] << " ";
+	std::cout << std::endl;
+	std::cout << "----------------------------------------------------" << std::endl;
+
+	jacobMerge(pendingChainVector, onePairSize);
+	std::cout << std::endl;
 }
 
 void PmergeMe::sortVector()
 {
 	int before = 0;
 	int After = 0;
+	_beforeMyVector = _myVector;
 	before = clock();
-	mergeInsertSort(this->_elementCount, 1, 2);
+	mergeInsertSort(this->_elementCount, 2);
 	After = clock();
 	this->_VectorTime = After - before;
 }
@@ -199,7 +214,7 @@ void PmergeMe::sortVector()
 void PmergeMe::printResult()
 {
 	std::cout << "Before: ";
-	printVector(this->_myVector);
+	printVector(this->_beforeMyVector);
 	std::cout << "After:  ";
 	printVector(this->_mainChainVector);
 	std::cout \
