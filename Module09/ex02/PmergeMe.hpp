@@ -8,6 +8,7 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <deque>
 
 class PmergeMe
 {
@@ -20,21 +21,27 @@ class PmergeMe
         std::vector<int> _beforeMyVector;
         std::vector<int> _mainChainVector;
         std::deque<int> _myDeque;
-        std::vector<int> _sortedMyDeque;
+        std::deque<int> _beforeMyDeque;
+        std::deque<int> _mainChainDeque;
         bool charPtrToInt(char **argv);
         bool formatCheck(std::string str);
         void printVector(std::vector<int> vectorVar);
         void printDeque(std::deque<int> DequeVar);
         void errorPrint(std::string message);
-        void swapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
         void printResult();
+        void initJacobsthalNumber(int n);
         void sortVector();
+        void vectorMergeInsertSort(int elementCount, int onePairSize);
+        void vectorSwapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
+        void vectorDecouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int onePairSize);
+        void vectorJacobMerge(std::vector<int> &pendingChainVector, int onePairSize);
+        void vectorBinarySort(int start, int end, int pendPos, int onePairSize, std::vector<int> &pendingChainVector);
         void sortDeque();
-        void jacobMerge(std::vector<int> &pendingChainVector, int onePairSize);
-        void initJacobsthalNumber(int num);
-        void binarySort(int start, int end, int pendPos, int onePairSize, std::vector<int> &pendingChainVector);
-        void mergeInsertSort(int elementCount, int onePairSize);
-        void decouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int onePairSize);
+        void DequeMergeInsertSort(int elementCount, int onePairSize);
+        void DequeSwapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
+        void DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int totalPairCnt, int onePairSize);
+        void DequeJacobMerge(std::deque<int> &pendingChainDeque, int onePairSize);
+        void DequeBinarySort(int start, int end, int pendPos, int onePairSize, std::deque<int> &pendingChainDeque);
     public :
         PmergeMe();
         PmergeMe(const PmergeMe &other);
