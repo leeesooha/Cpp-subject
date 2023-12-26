@@ -166,9 +166,10 @@ void PmergeMe::sortVector()
 	double After = 0;
 	_beforeMyVector = _myVector;
 	before = clock();
+	CLOCKS_PER_SEC;
 	vectorMergeInsertSort(this->_elementCount, 2, oddPending);
 	After = clock();
-	this->_VectorTime = (After - before) / 1000;
+	this->_VectorTime = (After - before) / CLOCKS_PER_SEC;
 }
 
 void PmergeMe::DequeBinarySort(int start, int end, int pendPos, int onePairSize, std::deque<int> &pendingChainDeque)
@@ -291,7 +292,7 @@ void PmergeMe::sortDeque()
 	before = clock();
 	DequeMergeInsertSort(this->_elementCount, 2, oddPending);
 	After = clock();
-	this->_DequeTime = (After - before) / 1000;
+	this->_DequeTime = (After - before) / CLOCKS_PER_SEC;
 	return ;
 }
 
@@ -305,12 +306,12 @@ void PmergeMe::printResult()
 	printDeque(this->_mainChainDeque);
 	std::cout \
 	<< "Time to process a range of " << this->_elementCount \
-	<< " elements with std::vector : " << this->_VectorTime \
-	<< " ms" << std::endl;
+	<< " elements with std::vector : " << std::fixed << std::setprecision(6) << this->_VectorTime \
+	<< " s" << std::endl;
 	std::cout \
 	<< "Time to process a range of " << this->_elementCount \
-	<< " elements with std::deque : " << this->_DequeTime \
-	<< " ms" << std::endl;
+	<< " elements with std::deque : " << std::fixed << std::setprecision(6) << this->_DequeTime \
+	<< " s" << std::endl;
 }
 
 void PmergeMe::errorPrint(std::string message)
@@ -330,17 +331,10 @@ void PmergeMe::printDeque(std::deque<int> DequeVar)
 
 void PmergeMe::printVector(std::vector<int> vectorVar)
 {
-	// int i = 20;
 	for (std::vector<int>::iterator it = vectorVar.begin(); it != vectorVar.end(); it++)
 	{
-		// if (i == 0)
-		// {
-		// 	std::cout << "...." << std::endl;
-		// 	return ;
-		// }
 		std::cout << " ";
 		std::cout << *it;
-		// i--;
 	}
 	std::cout << std::endl;
 }
