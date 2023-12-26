@@ -11,6 +11,16 @@ PmergeMe& PmergeMe::operator=(const PmergeMe& other)
 {
 	if (this != &other)
 	{
+		this->_VectorTime = other._VectorTime;
+        this->_DequeTime = other._DequeTime;
+        this->_elementCount = other._elementCount;
+        this->_jacobsthalNumber = other._jacobsthalNumber;
+        this->_myVector = other._myVector;
+        this->_beforeMyVector = other._beforeMyVector;
+        this->_mainChainVector = other._mainChainVector;
+ 	   	this->_myDeque = other._myDeque;
+  	  	this->_beforeMyDeque = other._beforeMyDeque;
+   		this->_mainChainDeque = other._mainChainDeque;
 	}
 	return (*this);
 }
