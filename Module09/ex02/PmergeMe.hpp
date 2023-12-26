@@ -9,6 +9,7 @@
 #include <ctime>
 #include <iomanip>
 #include <deque>
+#include <limits>
 
 class PmergeMe
 {

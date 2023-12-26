@@ -357,7 +357,7 @@ bool PmergeMe::charPtrToInt(char **argv)
 	std::istringstream iss;
 	double num;
 
-	while (argv[i] != '\0')
+	while (argv[i] != 0)
 	{
 		if (formatCheck(argv[i]) == false)
 			return (false);
