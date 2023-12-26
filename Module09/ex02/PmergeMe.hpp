@@ -31,15 +31,15 @@ class PmergeMe
         void printResult();
         void initJacobsthalNumber(int n);
         void sortVector();
-        void vectorMergeInsertSort(int elementCount, int onePairSize);
+        void vectorMergeInsertSort(int elementCount, int onePairSize, std::vector<int> oddPending);
         void vectorSwapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
-        void vectorDecouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int onePairSize);
+        void vectorDecouplePendingChain(std::vector<int> &pendingChainVector, int totalPairCnt, int onePairSize, std::vector<int> oddPending);
         void vectorJacobMerge(std::vector<int> &pendingChainVector, int onePairSize);
         void vectorBinarySort(int start, int end, int pendPos, int onePairSize, std::vector<int> &pendingChainVector);
         void sortDeque();
-        void DequeMergeInsertSort(int elementCount, int onePairSize);
+        void DequeMergeInsertSort(int elementCount, int onePairSize, std::deque<int> oddPending);
         void DequeSwapPairs(int totalPairCnt, int onePairSize, int mainNpendingDiff);
-        void DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int totalPairCnt, int onePairSize);
+        void DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int totalPairCnt, int onePairSize, std::deque<int> oddPending);
         void DequeJacobMerge(std::deque<int> &pendingChainDeque, int onePairSize);
         void DequeBinarySort(int start, int end, int pendPos, int onePairSize, std::deque<int> &pendingChainDeque);
     public :

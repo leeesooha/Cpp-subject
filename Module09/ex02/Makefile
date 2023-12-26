@@ -5,7 +5,7 @@ OBJS = $(SRCS:.cpp=.o)
 INCLUDE = -I ./
 NAME = PmergeMe
 CXX = c++
-MYFLAGS = -std=c++98 -Wall -Wextra -Werror
+MYFLAGS = -std=c++98 -Wall -Wextra -Werror -g3
 CXXFLAGS = $(MYFLAGS) $(INCLUDE)
 
 

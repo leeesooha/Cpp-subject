@@ -91,10 +91,8 @@ void PmergeMe::vectorJacobMerge(std::vector<int> &pendingChainVector, int onePai
 	}
 }
 
-void PmergeMe::vectorDecouplePendingChain(std::vector<int> &pendingChainVector, int elementCount, int onePairSize)
+void PmergeMe::vectorDecouplePendingChain(std::vector<int> &pendingChainVector, int elementCount, int onePairSize, std::vector<int> oddPending)
 {
-	//a = this->_mainChainVector[i * onePairSize]
-	//b = this->_mainChainVector[i * onePairSize + (onePairSize / 2)]
 	std::vector<int> mainchain;
 	int pairIndex = 0;
 	int mainNpendingDiff = onePairSize / 2;
@@ -111,12 +109,9 @@ void PmergeMe::vectorDecouplePendingChain(std::vector<int> &pendingChainVector, 
 		i++;
 	}
 	pairIndex = i * onePairSize;
-	// if (pairIndex < static_cast<int>(_mainChainVector.size()))
-	// 	for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
-	// 		pendingChainVector.push_back(_mainChainVector[pairIndex + leftPair]);
 	if (elementCount % 2 == 1)
 		for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
-			pendingChainVector.push_back(_mainChainVector[pairIndex + leftPair]);
+			pendingChainVector.push_back(oddPending[pairIndex + leftPair]);
 	_mainChainVector = mainchain;
 }
 
@@ -135,7 +130,7 @@ void PmergeMe::vectorSwapPairs(int totalPairCnt, int onePairSize, int mainNpendi
 	}
 }
 
-void PmergeMe::vectorMergeInsertSort(int elementCount, int onePairSize)
+void PmergeMe::vectorMergeInsertSort(int elementCount, int onePairSize, std::vector<int> oddPending)
 {
 	int mainNpendingDiff = onePairSize / 2;
 	int totalPairCnt = elementCount / 2;
@@ -143,22 +138,25 @@ void PmergeMe::vectorMergeInsertSort(int elementCount, int onePairSize)
 
 	if (elementCount == 1)
 	{
+		oddPending = _myVector;
 		_mainChainVector = _myVector;
 		return ;
 	}
 	vectorSwapPairs(totalPairCnt, onePairSize, mainNpendingDiff);
-	vectorMergeInsertSort(elementCount / 2, onePairSize * 2);
-	vectorDecouplePendingChain(pendingChainVector, elementCount, onePairSize);
+	oddPending = _myVector;
+	vectorMergeInsertSort(elementCount / 2, onePairSize * 2, oddPending);
+	vectorDecouplePendingChain(pendingChainVector, elementCount, onePairSize, oddPending);
 	vectorJacobMerge(pendingChainVector, onePairSize);
 }
 
 void PmergeMe::sortVector()
 {
+	std::vector<int> oddPending;
 	double before = 0;
 	double After = 0;
 	_beforeMyVector = _myVector;
 	before = clock();
-	vectorMergeInsertSort(this->_elementCount, 2);
+	vectorMergeInsertSort(this->_elementCount, 2, oddPending);
 	After = clock();
 	this->_VectorTime = (After - before) / 1000;
 }
@@ -214,7 +212,7 @@ void PmergeMe::DequeJacobMerge(std::deque<int> &pendingChainDeque, int onePairSi
 	}
 }
 
-void PmergeMe::DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int elementCount, int onePairSize)
+void PmergeMe::DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int elementCount, int onePairSize, std::deque<int> oddPending)
 {
 	//a = this->_mainChainDeque[i * onePairSize]
 	//b = this->_mainChainDeque[i * onePairSize + (onePairSize / 2)]
@@ -234,18 +232,9 @@ void PmergeMe::DequeDecouplePendingChain(std::deque<int> &pendingChainDeque, int
 		i++;
 	}
 	pairIndex = i * onePairSize;
-	// if (pairIndex < static_cast<int>(_mainChainDeque.size()))
-	// 	for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
-	// 		pendingChainDeque.push_back(_mainChainDeque[pairIndex + leftPair]);
 	if (elementCount % 2 == 1)
-	{
 		for (int leftPair = 0; leftPair < mainNpendingDiff; leftPair++)
-		{
-			std::cout << "mainchain[ " << pairIndex << " + " << leftPair << "]" << " :" << _mainChainDeque[pairIndex + leftPair] << std::endl;
-			pendingChainDeque.push_back(_mainChainDeque[pairIndex + leftPair]);
-			
-		}
-	}
+			pendingChainDeque.push_back(oddPending[pairIndex + leftPair]);
 	_mainChainDeque = mainchain;
 }
 
@@ -264,7 +253,7 @@ void PmergeMe::DequeSwapPairs(int totalPairCnt, int onePairSize, int mainNpendin
 	}
 }
 
-void PmergeMe::DequeMergeInsertSort(int elementCount, int onePairSize)
+void PmergeMe::DequeMergeInsertSort(int elementCount, int onePairSize, std::deque<int> oddPending)
 {
 	int mainNpendingDiff = onePairSize / 2;
 	int totalPairCnt = elementCount / 2;
@@ -272,22 +261,25 @@ void PmergeMe::DequeMergeInsertSort(int elementCount, int onePairSize)
 
 	if (elementCount == 1)
 	{
+		oddPending = _myDeque;
 		_mainChainDeque = _myDeque;
 		return ;
 	}
 	DequeSwapPairs(totalPairCnt, onePairSize, mainNpendingDiff);
-	DequeMergeInsertSort(elementCount / 2, onePairSize * 2);
-	DequeDecouplePendingChain(pendingChainDeque, elementCount, onePairSize);
+	oddPending = _myDeque;
+	DequeMergeInsertSort(elementCount / 2, onePairSize * 2, oddPending);
+	DequeDecouplePendingChain(pendingChainDeque, elementCount, onePairSize, oddPending);
 	DequeJacobMerge(pendingChainDeque, onePairSize);
 }
 
 void PmergeMe::sortDeque()
 {
+	std::deque<int> oddPending;
 	double before = 0;
 	double After = 0;
 	_beforeMyDeque = _myDeque;
 	before = clock();
-	DequeMergeInsertSort(this->_elementCount, 2);
+	DequeMergeInsertSort(this->_elementCount, 2, oddPending);
 	After = clock();
 	this->_DequeTime = (After - before) / 1000;
 	return ;
@@ -297,8 +289,10 @@ void PmergeMe::printResult()
 {
 	std::cout << "Before: ";
 	printVector(this->_beforeMyVector);
-	std::cout << "After:  ";
+	std::cout << "After Vector:  ";
 	printVector(this->_mainChainVector);
+	std::cout << "After Deque :  ";
+	printDeque(this->_mainChainDeque);
 	std::cout \
 	<< "Time to process a range of " << this->_elementCount \
 	<< " elements with std::vector : " << this->_VectorTime \
